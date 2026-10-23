@@ -60,6 +60,7 @@ export const PROFILE_DATA: ProfileData = {
       status: "Completed",
       grade: "First Class with Distinction",
       highlights: [
+        "AIR 6 in NIMCET 2024 (All India Rank 6)",
         "Advanced Algorithms & Dynamic Programming",
         "Distributed Databases & High Availability",
         "Artificial Intelligence & Machine Learning Architectures",
