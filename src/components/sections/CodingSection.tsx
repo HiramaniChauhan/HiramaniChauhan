@@ -12,7 +12,7 @@ export function CodingSection() {
   return (
     <section
       id="coding"
-      className="relative min-h-screen w-full py-24 px-4 sm:px-8 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-white/5 bg-[#0c0d10]"
+      className="relative min-h-screen w-full py-24 px-4 sm:px-8 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-white/5 bg-black"
       aria-label="Coding & Verified Platforms"
     >
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-12 relative z-10">
@@ -34,11 +34,11 @@ export function CodingSection() {
           </p>
         </div>
 
-        {/* 2-Column: Clean Video + Minimalist Coding Tools (Name & Link) */}
+        {/* 2-Column: Seamlessly Blended Video + Minimalist Coding Tools */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-          {/* Left: Video Showcase without any window case/border */}
+          {/* Left: Video Showcase seamlessly integrated without any box or edge */}
           <div className="lg:col-span-7 flex justify-center lg:justify-start w-full">
-            <div className="relative w-full max-w-[520px] aspect-[720/960] rounded-2xl overflow-hidden bg-black/60 shadow-2xl">
+            <div className="relative w-full max-w-[520px] aspect-[720/960] flex items-center justify-center">
               <video
                 ref={videoRef}
                 src="https://cdn.recent.design/items/4m1bbar/0/720x960.mp4"
@@ -47,7 +47,8 @@ export function CodingSection() {
                 muted
                 playsInline
                 preload="auto"
-                className="w-full h-full object-cover"
+                style={{ mixBlendMode: "screen" }}
+                className="w-full h-full object-cover pointer-events-none select-none [mask-image:radial-gradient(ellipse_at_center,black_75%,transparent_100%)]"
               >
                 <source src="/videos/coding-terminal.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
