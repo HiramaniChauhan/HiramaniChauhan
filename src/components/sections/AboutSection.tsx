@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { GraduationCap, FileText, Terminal, Award, Sparkles } from "lucide-react";
+import { GraduationCap, FileText } from "lucide-react";
 import { PROFILE_DATA } from "@/data/profile";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
@@ -37,44 +37,25 @@ export function AboutSection() {
 
         {/* 2-Column: 3D Holographic Visualizer + Personal Narrative */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column: AIR-06 in NIMCET 2024 (Big Size) */}
-          <div className="lg:col-span-5 relative w-full h-[360px] sm:h-[420px] rounded-2xl border border-white/10 bg-[#0c0d10] overflow-hidden shadow-2xl p-7 sm:p-9 flex flex-col justify-between group">
-            {/* Ambient Radial Highlights */}
-            <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#b9c7a5]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#b9c7a5]/15 transition-colors" />
-            <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-[#c2b9d0]/10 rounded-full blur-3xl pointer-events-none" />
-
-            {/* Top Label */}
-            <div className="flex items-center justify-between z-10">
-              <span className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#b9c7a5] font-semibold">
-                <Award className="w-4 h-4 text-[#b9c7a5]" />
-                NATIONAL DISTINCTION
-              </span>
-              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-[#dfcaa5]">
-                TOP 0.01%
-              </span>
+          {/* Left Column: AIR-06 in NIMCET 2024 (Simple, No Background Card) */}
+          <div className="lg:col-span-5 flex flex-col justify-center gap-4 py-4">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#b9c7a5] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b9c7a5]" />
+              <span>NIMCET 2024 • ALL INDIA RANK</span>
             </div>
 
-            {/* Center: Big Size Typography for AIR-06 in NIMCET 2024 */}
-            <div className="my-auto py-4 flex flex-col gap-2 z-10">
-              <div className="text-6xl sm:text-7xl lg:text-8xl font-serif text-[#f2f4ec] font-normal tracking-tight leading-none drop-shadow-[0_4px_24px_rgba(255,255,255,0.08)]">
+            <div className="flex flex-col gap-1.5">
+              <div className="text-6xl sm:text-7xl lg:text-8xl font-serif text-[#f2f4ec] font-normal tracking-tight leading-none">
                 AIR-06
               </div>
               <div className="text-2xl sm:text-3xl lg:text-4xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
                 in NIMCET 2024
               </div>
-              <p className="text-xs font-mono text-[#828795] mt-1">
-                All India Rank 6 • National Institute of Technology
-              </p>
             </div>
 
-            {/* Bottom Telemetry Bar */}
-            <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono text-[#828795] z-10">
-              <span className="flex items-center gap-1.5 text-slate-300">
-                <Sparkles className="w-3.5 h-3.5 text-[#b9c7a5]" />
-                MCA ENTRANCE EXAMINATION
-              </span>
-              <span className="text-[#b9c7a5] font-semibold">VERIFIED</span>
-            </div>
+            <p className="text-xs sm:text-sm font-mono text-[#828795]">
+              Ranked 6th nationwide in the National Institute of Technology MCA Common Entrance Test.
+            </p>
           </div>
 
           {/* Right Column: Personal Story & Philosophy (7 Cols) */}
