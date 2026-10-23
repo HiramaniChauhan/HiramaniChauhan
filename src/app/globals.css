@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg-dark: #0c0d12;
+    --surface-dark: #121318;
+    --accent-sage: #b9c7a5;
+    --accent-sage-light: #c8d6b4;
+    --accent-lavender: #c2b9d0;
+    --text-ivory: #f2f4ec;
+    --text-muted: #828795;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-sage: rgba(185, 199, 165, 0.2);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #0c0d12;
+    color: #edece8;
+  }
+
+  body {
+    background-color: #0c0d12;
+    color: #edece8;
+    overflow-x: hidden;
+    font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Editorial Serif Font helper */
+  .font-serif {
+    font-family: var(--font-cormorant), "Times New Roman", Times, Georgia, serif;
+  }
+
+  /* Veyronix Ultra-Wide Geometric Tech Display Font */
+  .font-veyronix {
+    font-family: var(--font-unbounded), var(--font-syne), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  /* Minimalist Architectural Scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0c0d10;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(185, 199, 165, 0.2);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(185, 199, 165, 0.45);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Atmospheric Editorial Glassmorphism */
+.glass-panel {
+  background: rgba(18, 19, 24, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+}
+
+.glass-card {
+  background: rgba(16, 17, 22, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(22, 24, 31, 0.82);
+  border-color: rgba(185, 199, 165, 0.3);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.6), 0 0 25px 0 rgba(185, 199, 165, 0.08);
+}
+
+.glass-input {
+  background: rgba(13, 14, 18, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f2f4ec;
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: #b9c7a5;
+  box-shadow: 0 0 14px rgba(185, 199, 165, 0.2);
+  background: rgba(18, 19, 25, 0.95);
+}
+
+/* Atmospheric Glows & Shadows */
+.glow-sage {
+  text-shadow: 0 0 16px rgba(185, 199, 165, 0.45);
+}
+
+.glow-lavender {
+  text-shadow: 0 0 16px rgba(194, 185, 208, 0.45);
+}
+
+.glow-ivory {
+  text-shadow: 0 0 14px rgba(242, 244, 236, 0.3);
+}
+
+/* Atmospheric perspective lighting overlays */
+.colonnade-light-beam {
+  background: radial-gradient(
+    ellipse 60% 70% at 50% 0%,
+    rgba(185, 199, 165, 0.16) 0%,
+    rgba(185, 199, 165, 0.06) 40%,
+    rgba(194, 185, 208, 0.03) 65%,
+    transparent 85%
+  );
+}
+
+.colonnade-grid {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}
+
+/* Subtle pulse for ambient focal points */
+@keyframes portalPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.03);
+  }
+}
+
+.animate-portal-pulse {
+  animation: portalPulse 5s ease-in-out infinite;
+}
+
+/* Reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
