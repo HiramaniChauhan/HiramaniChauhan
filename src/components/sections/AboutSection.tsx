@@ -85,58 +85,27 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Education Timeline: MCA & B.Sc. Details */}
-        <div className="flex flex-col gap-4 mt-4">
-          <h3 className="text-2xl font-serif text-[#f2f4ec] flex items-center gap-2 font-normal">
+        {/* Academic Foundations: Simple (No Background Cards) */}
+        <div className="flex flex-col gap-6 mt-6 pt-6 border-t border-white/10">
+          <h3 className="text-xl sm:text-2xl font-serif text-[#f2f4ec] flex items-center gap-2 font-normal">
             <GraduationCap className="w-5 h-5 text-[#b9c7a5]" />
             Academic Foundations
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14">
             {PROFILE_DATA.education.map((edu, idx) => (
-              <div
-                key={idx}
-                onMouseEnter={playHover}
-                className="glass-card p-6 sm:p-7 rounded-2xl flex flex-col justify-between gap-4 border border-white/10 hover:border-[#b9c7a5]/40 transition-all"
-              >
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center justify-between flex-wrap gap-2">
-                    <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-[#b9c7a5]/10 text-[#b9c7a5] border border-[#b9c7a5]/30 font-semibold">
-                      {edu.status}
-                    </span>
-                    <span className="text-xs font-mono text-[#828795]">{edu.duration}</span>
-                  </div>
-
-                  <h4 className="text-2xl font-serif text-[#f2f4ec] font-normal mt-1">
+              <div key={idx} className="flex flex-col gap-1.5">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h4 className="text-xl sm:text-2xl font-serif text-[#f2f4ec] font-normal">
                     {edu.degree}
                   </h4>
-                  <span className="text-xs font-mono text-[#c2b9d0]">
-                    {edu.field}
+                  <span className="text-xs font-mono text-[#b9c7a5] shrink-0">
+                    {edu.duration}
                   </span>
-                  <span className="text-xs text-[#828795]">
-                    {edu.institution}
-                  </span>
-
-                  {edu.grade && (
-                    <div className="text-xs font-mono text-[#b9c7a5] mt-1">
-                      Academic Standing: {edu.grade}
-                    </div>
-                  )}
                 </div>
-
-                <div className="pt-3 border-t border-white/5 flex flex-col gap-1.5">
-                  <span className="text-[11px] font-mono text-[#828795] font-semibold uppercase tracking-wider">
-                    Core Coursework & Research:
-                  </span>
-                  <ul className="space-y-1 text-xs text-[#9da2af] font-sans">
-                    {edu.highlights.map((h, hIdx) => (
-                      <li key={hIdx} className="flex items-center gap-2">
-                        <span className="text-[#b9c7a5]">•</span>
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <span className="text-xs sm:text-sm font-mono text-[#828795]">
+                  {edu.institution}
+                </span>
               </div>
             ))}
           </div>
