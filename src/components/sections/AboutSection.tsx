@@ -58,18 +58,41 @@ export function AboutSection() {
             </p>
           </div>
 
-          {/* Right Column: Personal Story & Philosophy (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col gap-5 text-[#9da2af] leading-relaxed font-sans text-sm sm:text-base">
-            <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 text-xs font-mono text-[#b9c7a5]">
-              <strong className="text-white">MISSION PHILOSOPHY:</strong> {PROFILE_DATA.tagline}
+          {/* Right Column: Personal Narrative (Inspired by Reference) */}
+          <div className="lg:col-span-7 flex flex-col gap-6 text-[#9da2af] leading-relaxed font-sans">
+            {/* Top Intro Block */}
+            <div className="flex flex-col gap-3">
+              <span className="text-xs font-mono uppercase tracking-widest text-[#828795]">
+                ABOUT ME
+              </span>
+              <h3 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight leading-[1.08]">
+                Hi, I&apos;m <span className="italic text-[#c2b9d0]">Hiramani.</span>
+              </h3>
+              <p className="text-base sm:text-lg text-[#b8bcc8] font-sans leading-relaxed pt-1">
+                I&apos;m studying computer applications at NIT Tiruchirappalli, and building projects to understand software from the inside out.
+              </p>
             </div>
 
-            <p>{PROFILE_DATA.aboutStory.paragraph1}</p>
-            <p>{PROFILE_DATA.aboutStory.paragraph2}</p>
-            <p>{PROFILE_DATA.aboutStory.paragraph3}</p>
+            {/* Divider */}
+            <div className="w-full h-px bg-white/10" />
+
+            {/* What Interests Me Section */}
+            <div className="flex flex-col gap-3">
+              <h4 className="text-2xl sm:text-3xl font-serif text-[#f2f4ec] font-normal">
+                What interests me
+              </h4>
+              <div className="space-y-4 text-sm sm:text-base text-[#9da2af] leading-relaxed font-sans">
+                <p>
+                  I like working on problems that cross layers: a network protocol underneath a downloader, a queue behind an application, or a retrieval pipeline behind an AI response.
+                </p>
+                <p>
+                  That&apos;s why my projects look quite different from one another. Some involve user-facing products. Others go deeper into networking, distributed services, or information retrieval.
+                </p>
+              </div>
+            </div>
 
             {/* Quick Action to open Resume Modal */}
-            <div className="pt-2">
+            <div className="pt-1">
               <button
                 onClick={() => {
                   playClick();

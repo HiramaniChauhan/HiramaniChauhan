@@ -55,8 +55,8 @@ export const PROFILE_DATA: ProfileData = {
     {
       degree: "Master of Computer Applications (MCA)",
       field: "Computer Science & Advanced Software Engineering",
-      institution: "State University",
-      duration: "2022 — 2024",
+      institution: "NIT Tiruchirappalli",
+      duration: "2024 — Present",
       status: "Completed",
       grade: "First Class with Distinction",
       highlights: [
@@ -70,7 +70,7 @@ export const PROFILE_DATA: ProfileData = {
       degree: "Bachelor of Science (B.Sc.)",
       field: "Computer Science & Mathematical Foundations",
       institution: "State University",
-      duration: "2019 — 2022",
+      duration: "209 — 2022",
       status: "Completed",
       grade: "First Class",
       highlights: [
