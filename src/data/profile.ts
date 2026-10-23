@@ -69,8 +69,8 @@ export const PROFILE_DATA: ProfileData = {
     {
       degree: "Bachelor of Science (B.Sc.)",
       field: "Computer Science & Mathematical Foundations",
-      institution: "State University",
-      duration: "209 — 2022",
+      institution: "Mahatma Gandhi Kanshi Vidyapith, Varanasi",
+      duration: "2020 — 2023",
       status: "Completed",
       grade: "First Class",
       highlights: [
