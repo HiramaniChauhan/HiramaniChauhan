@@ -26,9 +26,6 @@ interface PortfolioState {
   selectedCertificate: Certificate | null;
   setSelectedCertificate: (cert: Certificate | null) => void;
 
-  isResumeOpen: boolean;
-  setIsResumeOpen: (isOpen: boolean) => void;
-
   activeSkillFilter: string;
   setActiveSkillFilter: (filter: string) => void;
 
@@ -55,9 +52,6 @@ export const usePortfolioStore = create<PortfolioState>((set) => ({
 
   selectedCertificate: null,
   setSelectedCertificate: (cert) => set({ selectedCertificate: cert }),
-
-  isResumeOpen: false,
-  setIsResumeOpen: (isOpen) => set({ isResumeOpen: isOpen }),
 
   activeSkillFilter: "All",
   setActiveSkillFilter: (filter) => set({ activeSkillFilter: filter }),

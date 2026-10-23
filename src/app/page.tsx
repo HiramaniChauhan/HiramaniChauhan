@@ -5,7 +5,6 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import { ProjectModal } from "@/components/ui/ProjectModal";
 import { CertificateModal } from "@/components/ui/CertificateModal";
-import { ResumeModal } from "@/components/ui/ResumeModal";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { WorkSection } from "@/components/sections/WorkSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
@@ -61,7 +60,6 @@ export default function Home() {
       {/* Interactive Global Modals */}
       <ProjectModal />
       <CertificateModal />
-      <ResumeModal />
     </div>
   );
 }

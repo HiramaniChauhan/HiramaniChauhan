@@ -3,11 +3,9 @@
 import React from "react";
 import { GraduationCap, FileText } from "lucide-react";
 import { PROFILE_DATA } from "@/data/profile";
-import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 export function AboutSection() {
-  const setIsResumeOpen = usePortfolioStore((state) => state.setIsResumeOpen);
   const { playClick, playHover } = useSoundEffects();
 
   return (
@@ -91,19 +89,19 @@ export function AboutSection() {
               </div>
             </div>
 
-            {/* Quick Action to open Resume Modal */}
+            {/* Quick Action to open Curriculum Vitae Link */}
             <div className="pt-1">
-              <button
-                onClick={() => {
-                  playClick();
-                  setIsResumeOpen(true);
-                }}
+              <a
+                href={PROFILE_DATA.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
                 onMouseEnter={playHover}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-semibold hover:bg-[#c8d6b4] transition-all shadow-md shadow-[#b9c7a5]/20"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-semibold hover:bg-[#c8d6b4] transition-all shadow-md shadow-[#b9c7a5]/20 hover:scale-105"
               >
                 <FileText className="w-3.5 h-3.5" />
                 VIEW FULL CURRICULUM VITAE
-              </button>
+              </a>
             </div>
           </div>
         </div>

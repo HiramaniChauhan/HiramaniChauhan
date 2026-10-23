@@ -22,6 +22,7 @@ export interface ProfileData {
   shortBio: string;
   tagline: string;
   socials: SocialLinks;
+  resumeUrl: string;
   aboutStory: {
     paragraph1: string;
     paragraph2: string;
@@ -43,6 +44,7 @@ export const PROFILE_DATA: ProfileData = {
     linkedin: "https://www.linkedin.com/in/hiramanichauhan",
     twitter: "https://x.com/hiramanichauhan",
   },
+  resumeUrl: "https://drive.google.com/drive/folders/1jmYiL78oZmQfJjXGmw12g2UGCyl-bA-T?usp=sharing",
   aboutStory: {
     paragraph1:
       "I am an engineer driven by curiosity about how computation shapes the real world. My work spans the intersection of Artificial Intelligence, distributed backend microservices, and modern web engineering.",

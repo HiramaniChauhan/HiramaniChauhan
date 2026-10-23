@@ -6,11 +6,10 @@ import { SceneContainer } from "@/components/3d/SceneContainer";
 import { Hero3DCore } from "@/components/3d/Hero3DCore";
 import { HLogoGlyph } from "@/components/ui/HLogoGlyph";
 import { CentralSauronEye } from "@/components/ui/CentralSauronEye";
-import { usePortfolioStore } from "@/store/usePortfolioStore";
+import { PROFILE_DATA } from "@/data/profile";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 export function HeroSection() {
-  const setIsResumeOpen = usePortfolioStore((state) => state.setIsResumeOpen);
   const { playClick, playHover } = useSoundEffects();
 
   return (
@@ -95,17 +94,17 @@ export function HeroSection() {
               ENTER THE ARCHIVE
             </a>
 
-            <button
-              onClick={() => {
-                playClick();
-                setIsResumeOpen(true);
-              }}
+            <a
+              href={PROFILE_DATA.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={playClick}
               onMouseEnter={playHover}
               className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#16171d]/80 hover:bg-[#1f2127] border border-white/10 text-[#f2f4ec] font-mono text-[10px] tracking-wider transition-all duration-300 hover:border-[#b9c7a5]/50"
             >
               <FileText className="w-3 h-3 text-[#b9c7a5]" />
               CURRICULUM VITAE
-            </button>
+            </a>
           </div>
         </div>
 
