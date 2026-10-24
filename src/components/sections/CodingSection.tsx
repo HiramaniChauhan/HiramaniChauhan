@@ -25,13 +25,7 @@ export function CodingSection() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Engineering craft.
             </h2>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
-              Live showcase & verified handles.
-            </h2>
           </div>
-          <p className="text-xs sm:text-sm text-[#828795] max-w-2xl font-mono">
-            Showcase demonstration and verified competitive coding profiles. No fabricated contribution graphs.
-          </p>
         </div>
 
         {/* 2-Column: Seamlessly Blended Video + Minimalist Coding Tools */}

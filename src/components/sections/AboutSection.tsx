@@ -24,13 +24,7 @@ export function AboutSection() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Personal narrative.
             </h2>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
-              Academic foundation & engineering ethics.
-            </h2>
           </div>
-          <p className="text-xs sm:text-sm text-[#828795] max-w-2xl font-mono">
-            Engineering philosophy, academic foundation (MCA & B.Sc.), and technical pursuit of high-performance intelligent software.
-          </p>
         </div>
 
         {/* 2-Column: 3D Holographic Visualizer + Personal Narrative */}

@@ -50,9 +50,6 @@ export function SkillsSection() {
               <h2 className="text-3xl sm:text-5xl font-serif text-[#f2f4ec] font-normal tracking-tight">
                 System foundations.
               </h2>
-              <h2 className="text-3xl sm:text-5xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
-                Trained on modern architectures.
-              </h2>
             </div>
           </div>
 

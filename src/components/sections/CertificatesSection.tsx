@@ -33,13 +33,7 @@ export function CertificatesSection() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Academic distinction.
             </h2>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
-              National physics examination merit.
-            </h2>
           </div>
-          <p className="text-xs sm:text-sm text-[#828795] max-w-2xl font-mono">
-            Recognitions, competitive scientific evaluations, and certified analytical foundations.
-          </p>
         </div>
 
         {/* Featured Certificate Card — Prestigious Showcase Presentation */}

@@ -45,13 +45,7 @@ export function ExperienceSection() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Past milestones.
             </h2>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
-              Engineering internships & research labs.
-            </h2>
           </div>
-          <p className="text-xs sm:text-sm text-[#828795] max-w-2xl font-mono">
-            A chronological timeline of engineering roles, research undertakings, and hands-on software development milestones.
-          </p>
         </div>
 
         {/* ── Timeline: Full Width, Wide Cards (Increased to Right, Reduced from Below, Fully Transparent) ── */}
