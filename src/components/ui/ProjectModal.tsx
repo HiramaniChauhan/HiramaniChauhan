@@ -154,7 +154,7 @@ export function ProjectModal() {
               <AlertCircle className="w-4 h-4" />
               The Problem Space
             </div>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-[#9da2af] leading-relaxed font-mono">
               {selectedProject.problem}
             </p>
           </div>
@@ -164,7 +164,7 @@ export function ProjectModal() {
               <CheckCircle2 className="w-4 h-4" />
               The Architectural Solution
             </div>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-[#9da2af] leading-relaxed font-mono">
               {selectedProject.solution}
             </p>
           </div>
@@ -180,7 +180,7 @@ export function ProjectModal() {
             {selectedProject.architecture.map((item, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 p-2.5 rounded-lg bg-white/[0.02] border border-white/5 font-sans"
+                className="flex items-start gap-2.5 text-xs sm:text-sm text-[#9da2af] p-2.5 rounded-lg bg-white/[0.02] border border-white/5 font-mono leading-relaxed"
               >
                 <span className="text-[#b9c7a5] font-mono font-bold">0{idx + 1}.</span>
                 <span>{item}</span>
@@ -214,7 +214,7 @@ export function ProjectModal() {
               <Sparkles className="w-4 h-4 text-[#dfcaa5]" />
               Key Features
             </h3>
-            <ul className="space-y-1.5 text-xs text-slate-300 font-sans">
+            <ul className="space-y-1.5 text-xs text-[#9da2af] font-mono leading-relaxed">
               {selectedProject.mainFeatures.map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-2">
                   <span className="text-[#dfcaa5] font-bold">•</span>
@@ -229,7 +229,7 @@ export function ProjectModal() {
               <ShieldAlert className="w-4 h-4 text-rose-300" />
               Engineering Challenges Solved
             </h3>
-            <ul className="space-y-1.5 text-xs text-slate-300 font-sans">
+            <ul className="space-y-1.5 text-xs text-[#9da2af] font-mono leading-relaxed">
               {selectedProject.challenges.map((challenge, idx) => (
                 <li key={idx} className="flex items-start gap-2">
                   <span className="text-rose-300 font-bold">•</span>

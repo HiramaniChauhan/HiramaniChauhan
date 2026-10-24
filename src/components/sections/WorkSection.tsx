@@ -100,7 +100,7 @@ export function WorkSection() {
 
                     {/* Tagline (visible on hover) */}
                     <p
-                      className={`text-[11px] text-[#828795] font-sans leading-relaxed line-clamp-2 transition-all duration-300 ${
+                      className={`text-[11px] text-[#9da2af] font-mono leading-relaxed line-clamp-2 transition-all duration-300 ${
                         isHovered
                           ? "opacity-100 max-h-20 mt-1"
                           : "opacity-0 max-h-0 mt-0 overflow-hidden"

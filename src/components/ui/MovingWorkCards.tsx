@@ -316,7 +316,7 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
                   <h3 className="text-xs sm:text-[13.5px] font-serif text-[#f2f4ec] font-normal group-hover:text-[#b9c7a5] transition-colors leading-snug line-clamp-2">
                     {proj.title}
                   </h3>
-                  <p className="text-[10px] sm:text-[10.5px] text-[#8e94a0] font-sans leading-relaxed line-clamp-2">
+                  <p className="text-[10px] sm:text-[10.5px] text-[#9da2af] font-mono leading-relaxed line-clamp-2">
                     {proj.tagline}
                   </p>
                   <div className="flex flex-wrap gap-1 mt-1">
@@ -381,7 +381,7 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
                 <h3 className="text-xs sm:text-[13.5px] font-serif text-[#f2f4ec] font-normal group-hover:text-[#b9c7a5] transition-colors leading-snug line-clamp-2">
                   {proj.title}
                 </h3>
-                <p className="text-[10.5px] text-[#8e94a0] font-sans leading-relaxed line-clamp-2">
+                <p className="text-[10.5px] text-[#9da2af] font-mono leading-relaxed line-clamp-2">
                   {proj.tagline}
                 </p>
                 <div className="flex flex-wrap gap-1 mt-1.5">
