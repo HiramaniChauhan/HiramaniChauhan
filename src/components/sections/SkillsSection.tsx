@@ -35,8 +35,8 @@ export function SkillsSection() {
       className="relative min-h-screen w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-white/5 bg-[#0a0b0e]"
       aria-label="Skills Matrix"
     >
-      {/* Authentic Reference Dot-Matrix Background (exact dot typography from reference video) */}
-      <DotMatrixBackground text="SA20" />
+      {/* Authentic Reference Dot-Matrix Background */}
+      <DotMatrixBackground text="AI SDE" />
 
       {/* MAIN CONTAINER */}
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 relative z-10 my-auto py-6">

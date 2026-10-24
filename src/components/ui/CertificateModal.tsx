@@ -11,13 +11,22 @@ export function CertificateModal() {
   const { playClick, playHover } = useSoundEffects();
 
   useEffect(() => {
+    if (!selectedCertificate) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && selectedCertificate) {
+      if (e.key === "Escape") {
         setSelectedCertificate(null);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
   }, [selectedCertificate, setSelectedCertificate]);
 
   if (!selectedCertificate) return null;
@@ -32,12 +41,16 @@ export function CertificateModal() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="cert-modal-title"
+      data-lenis-prevent
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
       onClick={handleClose}
+      onWheel={(e) => e.stopPropagation()}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-2xl bg-[#111217] border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 flex flex-col gap-6"
+        onWheel={(e) => e.stopPropagation()}
+        data-lenis-prevent
+        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto overscroll-contain bg-[#111217] border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 flex flex-col gap-6"
       >
         {/* Header */}
         <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">

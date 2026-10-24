@@ -7,17 +7,8 @@ interface DotMatrixBackgroundProps {
   className?: string;
 }
 
-// 5x7 dot-matrix font definition extracted directly from reference design
+// 5x7 dot-matrix font definitions
 const DOT_PATTERNS: Record<string, string[]> = {
-  S: [
-    ".###.",
-    "#...#",
-    "#....",
-    ".###.",
-    "....#",
-    "#...#",
-    ".###.",
-  ],
   A: [
     ".###.",
     "#...#",
@@ -27,50 +18,32 @@ const DOT_PATTERNS: Record<string, string[]> = {
     "#...#",
     "#...#",
   ],
-  "2": [
-    ".###.",
-    "#...#",
-    "....#",
-    "..##.",
-    ".#...",
-    "#....",
-    "#####",
-  ],
-  "0": [
-    ".###.",
-    "#...#",
-    "#...#",
-    "#...#",
-    "#...#",
-    "#...#",
-    ".###.",
-  ],
-  K: [
-    "#...#",
-    "#..#.",
-    "#.##.",
-    "##...",
-    "#.##.",
-    "#..#.",
-    "#...#",
-  ],
-  "6": [
-    ".###.",
-    "#....",
-    "#....",
+  B: [
     "####.",
     "#...#",
     "#...#",
+    "####.",
+    "#...#",
+    "#...#",
+    "####.",
+  ],
+  C: [
+    ".###.",
+    "#...#",
+    "#....",
+    "#....",
+    "#....",
+    "#...#",
     ".###.",
   ],
-  T: [
-    "#####",
-    "..#..",
-    "..#..",
-    "..#..",
-    "..#..",
-    "..#..",
-    "..#..",
+  D: [
+    "####.",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "####.",
   ],
   E: [
     "#####",
@@ -81,12 +54,21 @@ const DOT_PATTERNS: Record<string, string[]> = {
     "#....",
     "#####",
   ],
-  C: [
+  F: [
+    "#####",
+    "#....",
+    "#....",
+    "####.",
+    "#....",
+    "#....",
+    "#....",
+  ],
+  G: [
     ".###.",
     "#...#",
     "#....",
-    "#....",
-    "#....",
+    "#..##",
+    "#...#",
     "#...#",
     ".###.",
   ],
@@ -108,6 +90,24 @@ const DOT_PATTERNS: Record<string, string[]> = {
     "..#..",
     ".###.",
   ],
+  J: [
+    "..###",
+    "....#",
+    "....#",
+    "....#",
+    "#...#",
+    "#...#",
+    ".###.",
+  ],
+  K: [
+    "#...#",
+    "#..#.",
+    "#.##.",
+    "##...",
+    "#.##.",
+    "#..#.",
+    "#...#",
+  ],
   L: [
     "#....",
     "#....",
@@ -117,34 +117,276 @@ const DOT_PATTERNS: Record<string, string[]> = {
     "#....",
     "#####",
   ],
+  M: [
+    "#...#",
+    "##.##",
+    "#.#.#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+  ],
+  N: [
+    "#...#",
+    "##..#",
+    "#.#.#",
+    "#..##",
+    "#...#",
+    "#...#",
+    "#...#",
+  ],
+  O: [
+    ".###.",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    ".###.",
+  ],
+  P: [
+    "####.",
+    "#...#",
+    "#...#",
+    "####.",
+    "#....",
+    "#....",
+    "#....",
+  ],
+  Q: [
+    ".###.",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#.#.#",
+    "#..##",
+    ".####",
+  ],
+  R: [
+    "####.",
+    "#...#",
+    "#...#",
+    "####.",
+    "#.##.",
+    "#..#.",
+    "#...#",
+  ],
+  S: [
+    ".###.",
+    "#...#",
+    "#....",
+    ".###.",
+    "....#",
+    "#...#",
+    ".###.",
+  ],
+  T: [
+    "#####",
+    "..#..",
+    "..#..",
+    "..#..",
+    "..#..",
+    "..#..",
+    "..#..",
+  ],
+  U: [
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    ".###.",
+  ],
+  V: [
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    ".#.#.",
+    ".#.#.",
+    "..#..",
+  ],
+  W: [
+    "#...#",
+    "#...#",
+    "#...#",
+    "#.#.#",
+    "#.#.#",
+    "##.##",
+    "#...#",
+  ],
+  X: [
+    "#...#",
+    "#...#",
+    ".#.#.",
+    "..#..",
+    ".#.#.",
+    "#...#",
+    "#...#",
+  ],
+  Y: [
+    "#...#",
+    "#...#",
+    ".#.#.",
+    "..#..",
+    "..#..",
+    "..#..",
+    "..#..",
+  ],
+  Z: [
+    "#####",
+    "....#",
+    "...#.",
+    "..#..",
+    ".#...",
+    "#....",
+    "#####",
+  ],
+  "0": [
+    ".###.",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    "#...#",
+    ".###.",
+  ],
+  "1": [
+    "..#..",
+    ".##..",
+    "..#..",
+    "..#..",
+    "..#..",
+    "..#..",
+    ".###.",
+  ],
+  "2": [
+    ".###.",
+    "#...#",
+    "....#",
+    "..##.",
+    ".#...",
+    "#....",
+    "#####",
+  ],
+  "3": [
+    "####.",
+    "....#",
+    "....#",
+    ".###.",
+    "....#",
+    "....#",
+    "####.",
+  ],
+  "4": [
+    "#...#",
+    "#...#",
+    "#...#",
+    "#####",
+    "....#",
+    "....#",
+    "....#",
+  ],
+  "5": [
+    "#####",
+    "#....",
+    "#....",
+    "####.",
+    "....#",
+    "#...#",
+    ".###.",
+  ],
+  "6": [
+    ".###.",
+    "#....",
+    "#....",
+    "####.",
+    "#...#",
+    "#...#",
+    ".###.",
+  ],
+  "7": [
+    "#####",
+    "....#",
+    "...#.",
+    "..#..",
+    ".#...",
+    ".#...",
+    ".#...",
+  ],
+  "8": [
+    ".###.",
+    "#...#",
+    "#...#",
+    ".###.",
+    "#...#",
+    "#...#",
+    ".###.",
+  ],
+  "9": [
+    ".###.",
+    "#...#",
+    "#...#",
+    ".####",
+    "....#",
+    "....#",
+    ".###.",
+  ],
+  "-": [
+    ".....",
+    ".....",
+    ".....",
+    "#####",
+    ".....",
+    ".....",
+    ".....",
+  ],
 };
 
 export function DotMatrixBackground({
-  text = "SA20",
+  text = "AI SDE",
   className = "",
 }: DotMatrixBackgroundProps) {
   const dots = useMemo(() => {
     const chars = text.toUpperCase().split("");
-    const result: Array<{ x: number; y: number; key: string }> = [];
 
-    const dotSpacing = 44; // pixel spacing between dot centers
-    const charSpacing = 58; // gap between characters
-    const charWidth = 4 * dotSpacing; // 5 columns (0 to 4) = 4 intervals
+    const dotSpacing = 38; // pixel spacing between dot centers
+    const charSpacing = 36; // spacing between letters within a word
+    const wordSpacing = 72; // spacing between words
 
-    const totalWidth =
-      chars.length * charWidth + (chars.length - 1) * charSpacing;
-    const startX = -totalWidth / 2;
+    let currentX = 0;
+    const charPositions: Array<{ char: string; startX: number }> = [];
+
+    chars.forEach((char, i) => {
+      if (char === " ") {
+        currentX += wordSpacing;
+      } else {
+        charPositions.push({ char, startX: currentX });
+        const pattern = DOT_PATTERNS[char] || DOT_PATTERNS["S"];
+        const charCols = pattern[0]?.length || 5;
+        const charW = (charCols - 1) * dotSpacing;
+        currentX += charW;
+
+        if (i < chars.length - 1 && chars[i + 1] !== " ") {
+          currentX += charSpacing;
+        }
+      }
+    });
+
+    const totalWidth = currentX;
+    const offsetX = -totalWidth / 2;
     const startY = -(6 * dotSpacing) / 2;
 
-    chars.forEach((char, charIdx) => {
-      const pattern = DOT_PATTERNS[char] || DOT_PATTERNS["S"];
-      const charOriginX = startX + charIdx * (charWidth + charSpacing);
+    const result: Array<{ x: number; y: number; key: string }> = [];
 
+    charPositions.forEach(({ char, startX }, charIdx) => {
+      const pattern = DOT_PATTERNS[char] || DOT_PATTERNS["S"];
       pattern.forEach((rowStr, rowIdx) => {
         for (let colIdx = 0; colIdx < rowStr.length; colIdx++) {
           if (rowStr[colIdx] === "#") {
             result.push({
-              x: charOriginX + colIdx * dotSpacing,
+              x: offsetX + startX + colIdx * dotSpacing,
               y: startY + rowIdx * dotSpacing,
               key: `${charIdx}-${rowIdx}-${colIdx}`,
             });
@@ -162,8 +404,8 @@ export function DotMatrixBackground({
       aria-hidden="true"
     >
       <svg
-        className="w-full max-w-[1100px] h-auto opacity-[0.08] sm:opacity-[0.11] transition-opacity duration-700"
-        viewBox="-550 -180 1100 360"
+        className="w-full max-w-[1150px] h-auto opacity-[0.09] sm:opacity-[0.12] transition-opacity duration-700"
+        viewBox="-600 -180 1200 360"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -172,7 +414,7 @@ export function DotMatrixBackground({
             key={dot.key}
             cx={dot.x}
             cy={dot.y}
-            r="16"
+            r="14"
             className="fill-white transition-all duration-300"
           />
         ))}

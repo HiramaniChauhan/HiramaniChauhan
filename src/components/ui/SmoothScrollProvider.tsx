@@ -2,9 +2,12 @@
 
 import React, { useEffect, useRef } from "react";
 import Lenis from "lenis";
+import { usePortfolioStore } from "@/store/usePortfolioStore";
 
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const selectedProject = usePortfolioStore((state) => state.selectedProject);
+  const selectedCertificate = usePortfolioStore((state) => state.selectedCertificate);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -31,6 +34,16 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
       lenisRef.current = null;
     };
   }, []);
+
+  // Pause Lenis virtual-scroll when a modal is active so mouse-wheel scrolls the modal content directly
+  useEffect(() => {
+    if (!lenisRef.current) return;
+    if (selectedProject || selectedCertificate) {
+      lenisRef.current.stop();
+    } else {
+      lenisRef.current.start();
+    }
+  }, [selectedProject, selectedCertificate]);
 
   return <>{children}</>;
 }

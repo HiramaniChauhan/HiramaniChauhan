@@ -40,13 +40,17 @@ export function SkillSpotlightModal({ skill, onClose }: SkillSpotlightModalProps
   return (
     <div
       onClick={onClose}
+      onWheel={(e) => e.stopPropagation()}
+      data-lenis-prevent
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300"
       aria-modal="true"
       role="dialog"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-xl bg-[#111218] border border-white/15 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden"
+        onWheel={(e) => e.stopPropagation()}
+        data-lenis-prevent
+        className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto overscroll-contain bg-[#111218] border border-white/15 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
       >
         {/* Subtle ambient light glow */}
         <div

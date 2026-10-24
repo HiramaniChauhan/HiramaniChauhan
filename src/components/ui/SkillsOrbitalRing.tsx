@@ -183,11 +183,10 @@ export function SkillsOrbitalRing({
                 setHoveredSkillId(skill.id);
               }}
               onMouseLeave={() => setHoveredSkillId(null)}
-              className={`group cursor-pointer select-none rounded-lg p-3 flex flex-col justify-between h-[84px] transition-all duration-300 border ${
-                isHovered
-                  ? "bg-[#181a24] border-[#b9c7a5] scale-105 shadow-[0_0_20px_rgba(185,199,165,0.2)]"
-                  : "bg-[#111218]/90 border-white/10 hover:border-white/20"
-              }`}
+              className={`group cursor-pointer select-none rounded-lg p-3 flex flex-col justify-between h-[84px] transition-all duration-300 border ${isHovered
+                ? "bg-[#181a24] border-[#b9c7a5] scale-105 shadow-[0_0_20px_rgba(185,199,165,0.2)]"
+                : "bg-[#111218]/90 border-white/10 hover:border-white/20"
+                }`}
             >
               <div className="flex items-center justify-between">
                 <span className="text-[8px] font-mono tracking-wider text-[#828795] uppercase">
@@ -243,11 +242,10 @@ export function SkillsOrbitalRing({
                 setHoveredSkillId(skill.id);
               }}
               onMouseLeave={() => setHoveredSkillId(null)}
-              className={`w-full max-w-xl cursor-pointer select-none rounded-xl p-5 flex items-center justify-between transition-all duration-300 border ${
-                isHovered
-                  ? "bg-[#181a24] border-[#b9c7a5] scale-[1.02] shadow-[0_0_25px_rgba(185,199,165,0.25)]"
-                  : "bg-[#111218]/85 border-white/10 hover:border-white/20"
-              }`}
+              className={`w-full max-w-xl cursor-pointer select-none rounded-xl p-5 flex items-center justify-between transition-all duration-300 border ${isHovered
+                ? "bg-[#181a24] border-[#b9c7a5] scale-[1.02] shadow-[0_0_25px_rgba(185,199,165,0.25)]"
+                : "bg-[#111218]/85 border-white/10 hover:border-white/20"
+                }`}
             >
               <div className="flex items-center gap-4">
                 <span className="text-xs font-mono text-[#828795] w-6">
@@ -307,9 +305,8 @@ export function SkillsOrbitalRing({
         className="relative w-0 h-0 transition-transform duration-75 ease-out"
         style={{
           transformStyle: "preserve-3d",
-          transform: `rotateX(${52 + mouseParallax.y}deg) rotateZ(${
-            -22 + mouseParallax.x
-          }deg)`,
+          transform: `rotateX(${52 + mouseParallax.y}deg) rotateZ(${-22 + mouseParallax.x
+            }deg)`,
         }}
       >
         {/* Subtle elliptical orbit guide ring */}
@@ -368,11 +365,9 @@ export function SkillsOrbitalRing({
                 marginTop: "-41px",
                 zIndex: isHovered ? 999 : zIndex,
                 transformStyle: "preserve-3d",
-                transform: `translate3d(${x}px, ${y}px, ${
-                  isHovered ? 50 : 0
-                }px) rotateZ(${tangentDeg * 0.5}deg) rotateX(-52deg) scale(${
-                  isHovered ? depthScale * 1.18 : depthScale
-                })`,
+                transform: `translate3d(${x}px, ${y}px, ${isHovered ? 50 : 0
+                  }px) rotateZ(${tangentDeg * 0.5}deg) rotateX(-52deg) scale(${isHovered ? depthScale * 1.18 : depthScale
+                  })`,
                 opacity: isHovered ? 1 : depthOpacity,
                 transition: isDragging
                   ? "none"
@@ -381,11 +376,10 @@ export function SkillsOrbitalRing({
             >
               {/* The Small Size Box UI */}
               <div
-                className={`w-full h-full rounded-lg p-2.5 flex flex-col justify-between transition-all duration-300 border backdrop-blur-md ${
-                  isHovered
-                    ? "bg-[#181a24] border-[#b9c7a5] shadow-[0_0_24px_rgba(185,199,165,0.35)]"
-                    : "bg-[#121319]/95 border-white/10 group-hover:border-white/30"
-                }`}
+                className={`w-full h-full rounded-lg p-2.5 flex flex-col justify-between transition-all duration-300 border backdrop-blur-md ${isHovered
+                  ? "bg-[#181a24] border-[#b9c7a5] shadow-[0_0_24px_rgba(185,199,165,0.35)]"
+                  : "bg-[#121319]/95 border-white/10 group-hover:border-white/30"
+                  }`}
               >
                 {/* Top: Category Tag + Skill Color Dot */}
                 <div className="flex items-center justify-between">
@@ -427,12 +421,6 @@ export function SkillsOrbitalRing({
             </div>
           );
         })}
-      </div>
-
-      {/* Orbit Drag / Interaction Helper Hint at bottom */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-[10px] font-mono text-[#828795] tracking-wider uppercase pointer-events-none bg-black/40 px-3 py-1 rounded-full border border-white/5 backdrop-blur-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#b9c7a5] animate-pulse" />
-        <span>Drag to rotate 360° // Click small box to inspect</span>
       </div>
     </div>
   );

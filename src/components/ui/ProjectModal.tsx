@@ -12,13 +12,23 @@ export function ProjectModal() {
   const { playClick, playHover } = useSoundEffects();
 
   useEffect(() => {
+    if (!selectedProject) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && selectedProject) {
+      if (e.key === "Escape") {
         setSelectedProject(null);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    // Lock background webpage scroll while modal is active
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
   }, [selectedProject, setSelectedProject]);
 
   if (!selectedProject) return null;
@@ -33,15 +43,39 @@ export function ProjectModal() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="project-modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/85 backdrop-blur-xl animate-in fade-in duration-300"
+      data-lenis-prevent
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
       onClick={handleClose}
+      onWheel={(e) => e.stopPropagation()}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#111217] border border-white/10 rounded-2xl shadow-2xl text-[#edece8] p-6 sm:p-8 flex flex-col gap-6"
+        onWheel={(e) => e.stopPropagation()}
+        data-lenis-prevent
+        className="relative w-full max-w-4xl max-h-[85vh] sm:max-h-[88vh] overflow-y-auto overscroll-contain bg-[#111217] border border-white/10 rounded-2xl shadow-2xl text-[#edece8] p-6 sm:p-8 flex flex-col gap-6 custom-modal-scroll"
+        style={{
+          WebkitOverflowScrolling: "touch",
+        }}
       >
-        {/* Header Bar */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
+        <style>{`
+          .custom-modal-scroll::-webkit-scrollbar {
+            width: 6px;
+          }
+          .custom-modal-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 9999px;
+          }
+          .custom-modal-scroll::-webkit-scrollbar-thumb {
+            background: rgba(185, 199, 165, 0.35);
+            border-radius: 9999px;
+          }
+          .custom-modal-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(185, 199, 165, 0.65);
+          }
+        `}</style>
+
+        {/* Sticky Header Bar */}
+        <div className="sticky -top-6 sm:-top-8 -mt-6 sm:-mt-8 -mx-6 sm:-mx-8 px-6 sm:px-8 pt-6 sm:pt-8 pb-4 bg-[#111217]/95 backdrop-blur-md z-20 flex items-start justify-between gap-4 border-b border-white/10 rounded-t-2xl">
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2.5 flex-wrap">
               <span
