@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Volume2, VolumeX, Menu, X } from "lucide-react";
 import { SectionId, usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
-import { HLogoGlyph } from "@/components/ui/HLogoGlyph";
 
 interface NavItem {
   id: SectionId;
@@ -42,6 +41,29 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scrolling when mobile drawer is open
+  useEffect(() => {
+    if (isMobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileOpen]);
+
+  // Close mobile drawer on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileOpen) {
+        setIsMobileOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileOpen]);
+
   const handleNavClick = (id: SectionId) => {
     playClick();
     setActiveSection(id);
@@ -68,7 +90,7 @@ export function Navbar() {
             {/* Serif Monogram with Sage 8-Point Asterisk */}
             <div className="relative flex items-start">
               <span className="font-serif text-2xl sm:text-[1.7rem] font-normal tracking-tight text-[#f2f4ec] leading-none group-hover:text-[#b9c7a5] transition-colors">
-                am
+                hc
               </span>
               {/* Sage 8-spoke asterisk */}
               <svg
@@ -153,19 +175,19 @@ export function Navbar() {
           </div>
 
           {/* Mobile / Tablet Controls */}
-          <div className="lg:hidden flex items-center gap-1.5">
+          <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={() => {
                 playClick();
                 toggleSound();
               }}
-              className={`w-6 h-6 rounded-full border transition-all duration-200 flex items-center justify-center ${isSoundEnabled
+              className={`w-8 h-8 rounded-full border transition-all duration-200 flex items-center justify-center ${isSoundEnabled
                   ? "bg-[#b9c7a5]/15 border-[#b9c7a5]/40 text-[#b9c7a5]"
-                  : "bg-white/5 border-white/10 text-[#6d7280]"
+                  : "bg-white/5 border-white/10 text-[#6d7280] active:scale-95"
                 }`}
               aria-label="Toggle Audio"
             >
-              {isSoundEnabled ? <Volume2 className="w-3 h-3" /> : <VolumeX className="w-3 h-3" />}
+              {isSoundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
             </button>
 
             <button
@@ -173,10 +195,10 @@ export function Navbar() {
                 playClick();
                 setIsMobileOpen(!isMobileOpen);
               }}
-              className="p-1.5 rounded bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors"
+              className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-white hover:bg-white/10 flex items-center justify-center transition-colors active:scale-95"
               aria-label="Toggle Navigation Menu"
             >
-              {isMobileOpen ? <X className="w-3.5 h-3.5 text-[#b9c7a5]" /> : <Menu className="w-3.5 h-3.5" />}
+              {isMobileOpen ? <X className="w-4 h-4 text-[#b9c7a5]" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
@@ -188,10 +210,10 @@ export function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation Menu"
-          className="lg:hidden fixed inset-0 z-40 bg-[#0c0d10]/95 backdrop-blur-xl pt-20 px-6 pb-8 flex flex-col justify-between animate-in fade-in duration-200 border-b border-white/10"
+          className="lg:hidden fixed inset-0 z-40 bg-[#0c0d10]/98 backdrop-blur-2xl pt-20 px-5 sm:px-8 pb-8 flex flex-col justify-between overflow-y-auto overscroll-contain animate-in fade-in duration-200 border-b border-white/10"
         >
-          <div className="flex flex-col gap-2">
-            <div className="text-[10px] font-mono text-[#626773] uppercase tracking-widest mb-1 px-3">
+          <div className="flex flex-col gap-1.5 py-2">
+            <div className="text-[10px] font-mono text-[#626773] uppercase tracking-widest mb-2 px-3">
               Section Index
             </div>
             {NAV_ITEMS.map((item) => {
@@ -201,27 +223,27 @@ export function Navbar() {
                   key={item.id}
                   href={item.href}
                   onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center justify-between px-3 py-2 rounded font-mono text-xs transition-all ${isActive
-                      ? "bg-white/5 text-[#f2f4ec] font-medium"
-                      : "text-[#8e94a0] hover:text-[#f2f4ec]"
+                  className={`min-h-[44px] flex items-center justify-between px-3.5 py-2.5 rounded-xl font-mono text-xs transition-all active:scale-[0.98] ${isActive
+                      ? "bg-white/10 text-[#f2f4ec] font-medium border border-white/10"
+                      : "text-[#8e94a0] hover:text-[#f2f4ec] hover:bg-white/5"
                     }`}
                 >
-                  <span className="flex items-center gap-2.5">
-                    <span className="text-[10px] text-[#626773] font-mono">{item.index}</span>
-                    <span className="font-sans text-xs">{item.label}</span>
+                  <span className="flex items-center gap-3">
+                    <span className="text-[10px] text-[#626773] font-mono w-4">{item.index}</span>
+                    <span className="font-sans text-sm">{item.label}</span>
                   </span>
                   {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#b9c7a5] shadow-[0_0_6px_rgba(185,199,165,0.8)]" />
+                    <span className="w-2 h-2 rounded-full bg-[#b9c7a5] shadow-[0_0_8px_rgba(185,199,165,0.9)]" />
                   )}
                 </a>
               );
             })}
           </div>
 
-          <div className="pt-6 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-[#6d7280]">
-            <span>CODEVERSE // HIRAMANI CHAUHAN</span>
-            <span className="text-[#b9c7a5] flex items-center gap-1">
-              <span className="w-1 h-1 rounded-full bg-[#b9c7a5]" />
+          <div className="pt-6 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-[#6d7280] mt-4">
+            <span className="truncate max-w-[200px]">CODEVERSE // HIRAMANI</span>
+            <span className="text-[#b9c7a5] flex items-center gap-1.5 shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b9c7a5] animate-pulse" />
               ONLINE
             </span>
           </div>

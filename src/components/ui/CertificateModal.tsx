@@ -42,7 +42,7 @@ export function CertificateModal() {
       aria-modal="true"
       aria-labelledby="cert-modal-title"
       data-lenis-prevent
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-200"
       onClick={handleClose}
       onWheel={(e) => e.stopPropagation()}
     >
@@ -50,19 +50,19 @@ export function CertificateModal() {
         onClick={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
         data-lenis-prevent
-        className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto overscroll-contain bg-[#111217] border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 flex flex-col gap-6"
+        className="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto overscroll-contain bg-[#111217] border border-white/10 rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6"
       >
         {/* Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4">
+        <div className="flex items-start justify-between gap-3 sm:gap-4 border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-              <Award className="w-6 h-6 text-[#b9c7a5]" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+              <Award className="w-5 h-5 sm:w-6 sm:h-6 text-[#b9c7a5]" />
             </div>
             <div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#828795]">
                 {selectedCertificate.category}
               </span>
-              <h3 id="cert-modal-title" className="text-2xl font-serif text-[#f2f4ec] font-normal">
+              <h3 id="cert-modal-title" className="text-xl sm:text-2xl font-serif text-[#f2f4ec] font-normal leading-snug">
                 {selectedCertificate.title}
               </h3>
             </div>
@@ -71,10 +71,10 @@ export function CertificateModal() {
           <button
             onClick={handleClose}
             onMouseEnter={playHover}
-            className="p-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-[#b9c7a5]/20 hover:border-[#b9c7a5] text-slate-300 hover:text-white transition-colors"
+            className="p-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-[#b9c7a5]/20 hover:border-[#b9c7a5] text-slate-300 hover:text-white transition-colors shrink-0"
             aria-label="Close Certificate Modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 

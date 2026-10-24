@@ -19,7 +19,7 @@ export function ContactSection() {
   const [isOpen, setIsOpen] = useState(false);
   const [letterVisible, setLetterVisible] = useState(false);
   const envelopeRef = useRef<HTMLDivElement>(null);
-  const [envRect, setEnvRect] = useState({ x: 0, y: 0, w: 0, h: 0 });
+  const [, setEnvRect] = useState({ x: 0, y: 0, w: 0, h: 0 });
 
   const [formState, setFormState] = useState({
     name: "",
@@ -321,11 +321,17 @@ export function ContactSection() {
             0 30px 80px rgba(0,0,0,0.6),
             0 0 60px rgba(185,199,165,0.05),
             0 0 1px rgba(255,255,255,0.1);
-          padding: 32px 28px 28px;
+          padding: 22px 18px 18px;
           display: flex;
           flex-direction: column;
           overflow-y: auto;
-          max-height: 85vh;
+          max-height: 88vh;
+        }
+
+        @media (min-width: 640px) {
+          .letter-paper {
+            padding: 32px 28px 28px;
+          }
         }
 
         .letter-paper::-webkit-scrollbar { width: 4px; }
@@ -335,21 +341,31 @@ export function ContactSection() {
         /* Close button */
         .letter-close {
           position: absolute;
-          top: -12px;
-          right: -12px;
-          width: 36px;
-          height: 36px;
+          top: 10px;
+          right: 10px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
           background: #1a1a2e;
-          border: 1px solid rgba(255,255,255,0.1);
+          border: 1px solid rgba(255,255,255,0.12);
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          z-index: 102;
+          z-index: 105;
           transition: background 0.2s, border-color 0.2s, transform 0.2s;
           box-shadow: 0 4px 16px rgba(0,0,0,0.5);
         }
+
+        @media (min-width: 640px) {
+          .letter-close {
+            top: -12px;
+            right: -12px;
+            width: 36px;
+            height: 36px;
+          }
+        }
+
         .letter-close:hover {
           background: #252540;
           border-color: rgba(185,199,165,0.3);
@@ -370,18 +386,16 @@ export function ContactSection() {
 
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-10 relative z-10">
         {/* Header */}
-        <div className="flex flex-col gap-4 border-b border-white/10 pb-6">
+        <div className="flex flex-col gap-3 sm:gap-4 border-b border-white/10 pb-6">
           <div className="flex items-center gap-2 text-xs font-mono text-[#828795] uppercase tracking-widest">
             <span className="text-[#b9c7a5] font-bold">07 -</span> DIRECT
             COMMUNICATIONS
           </div>
           <div className="flex flex-col">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Initiate contact.
             </h2>
-
           </div>
-
         </div>
 
         {/* 2 Column: Envelope + Side Panel */}
@@ -645,7 +659,7 @@ export function ContactSection() {
                 </label>
                 <textarea
                   required
-                  rows={5}
+                  rows={4}
                   value={formState.message}
                   onChange={(e) =>
                     setFormState({ ...formState, message: e.target.value })

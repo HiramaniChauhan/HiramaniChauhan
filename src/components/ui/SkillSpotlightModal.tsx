@@ -42,7 +42,7 @@ export function SkillSpotlightModal({ skill, onClose }: SkillSpotlightModalProps
       onClick={onClose}
       onWheel={(e) => e.stopPropagation()}
       data-lenis-prevent
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md transition-opacity duration-300"
       aria-modal="true"
       role="dialog"
     >
@@ -50,7 +50,7 @@ export function SkillSpotlightModal({ skill, onClose }: SkillSpotlightModalProps
         onClick={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
         data-lenis-prevent
-        className="relative w-full max-w-xl max-h-[85vh] overflow-y-auto overscroll-contain bg-[#111218] border border-white/15 rounded-2xl p-6 sm:p-8 flex flex-col gap-6 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+        className="relative w-full max-w-xl max-h-[88vh] overflow-y-auto overscroll-contain bg-[#111218] border border-white/15 rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
       >
         {/* Subtle ambient light glow */}
         <div
@@ -59,9 +59,9 @@ export function SkillSpotlightModal({ skill, onClose }: SkillSpotlightModalProps
         />
 
         {/* Top Header Row */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2">
+        <div className="flex items-start justify-between gap-3 sm:gap-4 border-b border-white/10 pb-4 sm:pb-5">
+          <div className="flex flex-col gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span
                 className="w-2.5 h-2.5 rounded-full"
                 style={{
@@ -69,16 +69,16 @@ export function SkillSpotlightModal({ skill, onClose }: SkillSpotlightModalProps
                   boxShadow: `0 0 10px ${skill.color}`,
                 }}
               />
-              <span className="text-[11px] font-mono tracking-wider text-[#828795] uppercase">
+              <span className="text-[10px] sm:text-[11px] font-mono tracking-wider text-[#828795] uppercase">
                 {skill.category}
               </span>
               {skill.isCore && (
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#b9c7a5]/15 text-[#b9c7a5] border border-[#b9c7a5]/30">
+                <span className="text-[9.5px] sm:text-[10px] font-mono px-2 py-0.5 rounded bg-[#b9c7a5]/15 text-[#b9c7a5] border border-[#b9c7a5]/30">
                   CORE EXPERTISE
                 </span>
               )}
             </div>
-            <h3 className="text-2xl sm:text-3xl font-serif text-[#f2f4ec] font-normal tracking-tight">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               {skill.name}
             </h3>
           </div>
@@ -88,7 +88,7 @@ export function SkillSpotlightModal({ skill, onClose }: SkillSpotlightModalProps
               playClick();
               onClose();
             }}
-            className="p-2 rounded-full bg-white/5 hover:bg-white/10 text-[#828795] hover:text-white transition-colors"
+            className="p-1.5 sm:p-2 rounded-full bg-white/5 hover:bg-white/10 text-[#828795] hover:text-white transition-colors shrink-0"
             aria-label="Close dialog"
           >
             <X className="w-4 h-4" />

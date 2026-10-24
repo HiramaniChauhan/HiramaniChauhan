@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Cormorant_Garamond, Unbounded, Syne } from "next/font/google";
 import { SmoothScrollProvider } from "@/components/ui/SmoothScrollProvider";
 import "./globals.css";
@@ -33,7 +33,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Hiramani Chauhan | CODEVERSE — 3D AI & Software Engineering Universe",
+  title: "Hiramani Chauhan | AI & Software Engineering Universe",
   description:
     "Production-quality, cinematic 3D personal developer portfolio of Hiramani Chauhan. Demonstrating AI/ML engineering, GenAI pipelines, robust backend architectures, and high-performance full-stack applications.",
   keywords: [
@@ -57,14 +57,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://codeverse.dev",
-    title: "Hiramani Chauhan | CODEVERSE — 3D AI & Software Engineering Universe",
+    title: "Hiramani Chauhan | AI & Software Engineering Universe",
     description:
       "Explore the interactive 3D universe of Hiramani Chauhan: AI & GenAI systems, computer vision, full-stack platforms, and engineering achievements.",
     siteName: "CODEVERSE // Hiramani Chauhan",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hiramani Chauhan | CODEVERSE",
+    title: "Hiramani Chauhan",
     description:
       "AI / GenAI Engineer | Full Stack Developer | Software Engineer. Explore projects in a 3D universe.",
   },
@@ -72,6 +72,16 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "data:,",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0c0d12",
 };
 
 export default function RootLayout({
@@ -84,7 +94,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${unbounded.variable} ${syne.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[#0c0d12] text-[#edece8]">
+      <body className="min-h-full flex flex-col bg-[#0c0d12] text-[#edece8] overflow-x-hidden w-full max-w-full">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>

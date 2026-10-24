@@ -8,7 +8,7 @@ import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 export function CertificatesSection() {
   const setSelectedCertificate = usePortfolioStore((state) => state.setSelectedCertificate);
-  const { playClick, playHover, playChime } = useSoundEffects();
+  const { playHover, playChime } = useSoundEffects();
 
   const handleOpenCert = (cert: Certificate) => {
     playChime(700, 0.3);
@@ -25,12 +25,12 @@ export function CertificatesSection() {
     >
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-12 relative z-10">
         {/* Header */}
-        <div className="flex flex-col gap-4 border-b border-white/10 pb-6">
+        <div className="flex flex-col gap-3 sm:gap-4 border-b border-white/10 pb-6">
           <div className="flex items-center gap-2 text-xs font-mono text-[#828795] uppercase tracking-widest">
             <span className="text-[#b9c7a5] font-bold">05 -</span> HONORS & ACCREDITATION
           </div>
           <div className="flex flex-col">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Academic distinction.
             </h2>
           </div>
@@ -42,19 +42,19 @@ export function CertificatesSection() {
             <div
               onClick={() => handleOpenCert(cert)}
               onMouseEnter={playHover}
-              className="glass-card p-8 sm:p-10 rounded-3xl border border-white/10 hover:border-[#b9c7a5]/50 transition-all duration-300 cursor-pointer group flex flex-col gap-8 shadow-2xl relative overflow-hidden"
+              className="glass-card p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl border border-white/10 hover:border-[#b9c7a5]/50 transition-all duration-300 cursor-pointer group flex flex-col gap-6 sm:gap-8 shadow-2xl relative overflow-hidden"
             >
               {/* Subtle Ambient Radial Highlight */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-[#b9c7a5]/5 rounded-full blur-3xl pointer-events-none group-hover:bg-[#b9c7a5]/10 transition-colors" />
 
               {/* Top Banner Row */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#b9c7a5]/10 border border-[#b9c7a5]/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-[#b9c7a5]/20 transition-all">
-                    <Award className="w-7 h-7 text-[#b9c7a5]" />
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6">
+                <div className="flex items-center gap-3.5 sm:gap-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#b9c7a5]/10 border border-[#b9c7a5]/30 flex items-center justify-center shrink-0 group-hover:scale-105 group-hover:bg-[#b9c7a5]/20 transition-all">
+                    <Award className="w-6 h-6 sm:w-7 sm:h-7 text-[#b9c7a5]" />
                   </div>
                   <div className="flex flex-col">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-xs font-mono uppercase tracking-widest text-[#b9c7a5] font-bold">
                         {cert.category}
                       </span>
@@ -70,40 +70,40 @@ export function CertificatesSection() {
                 </div>
 
                 <div className="flex sm:flex-col sm:items-end justify-between text-xs font-mono text-[#828795] gap-1">
-                  <span className="flex items-center gap-1.5 text-[#b9c7a5] font-semibold text-sm">
-                    <Calendar className="w-4 h-4" />
+                  <span className="flex items-center gap-1.5 text-[#b9c7a5] font-semibold text-xs sm:text-sm">
+                    <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     Year: {cert.issueDate}
                   </span>
-                  <span className="text-[11px] text-[#828795]">B.Sc. Level Qualification</span>
+                  <span className="text-[10.5px] sm:text-[11px] text-[#828795]">B.Sc. Level Qualification</span>
                 </div>
               </div>
 
               {/* Certificate Title & Detailed Achievement */}
-              <div className="flex flex-col gap-3">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-serif text-[#f2f4ec] font-normal leading-snug group-hover:text-[#b9c7a5] transition-colors">
+              <div className="flex flex-col gap-2.5 sm:gap-3">
+                <h3 className="text-xl sm:text-3xl md:text-4xl font-serif text-[#f2f4ec] font-normal leading-snug group-hover:text-[#b9c7a5] transition-colors">
                   {cert.title}
                 </h3>
-                <span className="text-sm sm:text-base font-mono text-[#c2b9d0]">
+                <span className="text-xs sm:text-base font-mono text-[#c2b9d0]">
                   Conducted by: <strong className="text-white font-medium">{cert.issuer}</strong>
                 </span>
 
-                <p className="text-xs sm:text-sm text-[#9da2af] font-mono leading-relaxed mt-2">
+                <p className="text-xs sm:text-sm text-[#9da2af] font-mono leading-relaxed mt-1 sm:mt-2">
                   {cert.description}
                 </p>
               </div>
 
               {/* Validated Academic & Problem-Solving Competencies */}
-              <div className="flex flex-col gap-3 pt-2">
+              <div className="flex flex-col gap-2.5 sm:gap-3 pt-1 sm:pt-2">
                 <span className="text-xs font-mono uppercase tracking-widest text-[#828795] font-semibold">
                   Competencies & Scientific Domains Validated:
                 </span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {cert.skillsCovered.map((skill, idx) => (
                     <span
                       key={idx}
-                      className="px-3.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-slate-200 flex items-center gap-1.5 group-hover:border-[#b9c7a5]/30 transition-colors"
+                      className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-white/[0.03] border border-white/10 text-[11px] sm:text-xs font-mono text-slate-200 flex items-center gap-1.5 group-hover:border-[#b9c7a5]/30 transition-colors"
                     >
-                      <CheckCircle className="w-3.5 h-3.5 text-[#b9c7a5]" />
+                      <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#b9c7a5]" />
                       {skill}
                     </span>
                   ))}

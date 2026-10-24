@@ -23,7 +23,7 @@ export function Footer() {
             {/* Serif Monogram with Sage 8-Point Asterisk */}
             <div className="relative flex items-start">
               <span className="font-serif text-2xl sm:text-[1.7rem] font-normal tracking-tight text-[#f2f4ec] leading-none">
-                am
+                hc
               </span>
               {/* Sage 8-spoke asterisk */}
               <svg

@@ -1,8 +1,18 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useSyncExternalStore } from "react";
 import { SkillItem } from "@/data/skills";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
+
+const emptySubscribe = () => () => {};
+
+function useIsMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
 
 interface SkillsOrbitalRingProps {
   skills: SkillItem[];
@@ -19,9 +29,9 @@ export function SkillsOrbitalRing({
   setHoveredSkillId,
   viewMode = "orbit",
 }: SkillsOrbitalRingProps) {
+  const isMounted = useIsMounted();
   const containerRef = useRef<HTMLDivElement>(null);
-  const rotationRef = useRef(0);
-  const [, setRenderTick] = useState(0);
+  const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [mouseParallax, setMouseParallax] = useState({ x: 0, y: 0 });
@@ -30,26 +40,33 @@ export function SkillsOrbitalRing({
   const lastX = useRef(0);
   const velocity = useRef(0);
   const animFrameId = useRef<number | null>(null);
-  const lastTime = useRef<number>(performance.now());
+  const lastTime = useRef<number>(0);
   const isDraggingRef = useRef(false);
   const isPausedRef = useRef(false);
   const hoveredRef = useRef<string | null>(null);
   const { playHover, playClick } = useSoundEffects();
 
-  // Keep refs in sync with state
-  isDraggingRef.current = isDragging;
-  isPausedRef.current = isPaused;
-  hoveredRef.current = hoveredSkillId;
+  // Keep refs in sync with state inside useEffect (not during render)
+  useEffect(() => {
+    isDraggingRef.current = isDragging;
+    isPausedRef.current = isPaused;
+    hoveredRef.current = hoveredSkillId;
+  });
 
   // Responsive radii
   const [radii, setRadii] = useState({ rx: 380, ry: 270, rz: 320 });
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
 
   useEffect(() => {
     const updateDimensions = () => {
       if (typeof window === "undefined") return;
       const width = window.innerWidth;
-      if (width < 640) {
-        setRadii({ rx: 170, ry: 130, rz: 160 });
+      setIsMobileScreen(width < 640);
+
+      if (width < 420) {
+        setRadii({ rx: Math.max(width * 0.34, 115), ry: 85, rz: 110 });
+      } else if (width < 640) {
+        setRadii({ rx: 155, ry: 115, rz: 145 });
       } else if (width < 1024) {
         setRadii({ rx: 270, ry: 195, rz: 230 });
       } else {
@@ -68,22 +85,17 @@ export function SkillsOrbitalRing({
       const dt = Math.min((now - lastTime.current) / 1000, 0.1);
       lastTime.current = now;
 
-      let changed = false;
       if (isDraggingRef.current) {
         // Being dragged manually - rotation updated in pointer handler
       } else if (Math.abs(velocity.current) > 0.0005) {
         // Inertia coasting
-        rotationRef.current += velocity.current;
+        const vel = velocity.current;
+        setRotation((r) => r + vel);
         velocity.current *= 0.94; // friction
-        changed = true;
       } else if (!isPausedRef.current && !hoveredRef.current) {
         // Constant orbital rotation speed
-        rotationRef.current += 0.12 * dt;
-        changed = true;
-      }
-
-      if (changed) {
-        setRenderTick((t) => t + 1);
+        const delta = 0.12 * dt;
+        setRotation((r) => r + delta);
       }
 
       animFrameId.current = requestAnimationFrame(loop);
@@ -126,8 +138,7 @@ export function SkillsOrbitalRing({
 
     // Convert pixel delta to angle radians
     const angleDelta = (deltaX / radii.rx) * 1.2;
-    rotationRef.current += angleDelta;
-    setRenderTick((t) => t + 1);
+    setRotation((r) => r + angleDelta);
     velocity.current = angleDelta * 0.4;
   };
 
@@ -287,6 +298,35 @@ export function SkillsOrbitalRing({
   // 3D ORBIT MODE (EXACT VIDEO MATCH)
   const count = skills.length;
 
+  // Prevent SSR hydration mismatch by rendering static container until client mounted
+  if (!isMounted) {
+    return (
+      <div
+        className="relative w-full h-[460px] sm:h-[600px] md:h-[720px] flex items-center justify-center select-none overflow-visible"
+        style={{
+          perspective: "1200px",
+          perspectiveOrigin: "50% 50%",
+        }}
+      >
+        <div
+          className="relative w-0 h-0"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: "rotateX(52deg) rotateZ(-22deg)",
+          }}
+        >
+          <div
+            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.04] pointer-events-none"
+            style={{
+              width: `${radii.rx * 2}px`,
+              height: `${radii.ry * 2}px`,
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       ref={containerRef}
@@ -294,7 +334,7 @@ export function SkillsOrbitalRing({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      className="relative w-full h-[620px] sm:h-[720px] md:h-[780px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-visible"
+      className="relative w-full h-[460px] sm:h-[600px] md:h-[720px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-visible"
       style={{
         perspective: "1200px",
         perspectiveOrigin: "50% 50%",
@@ -320,7 +360,7 @@ export function SkillsOrbitalRing({
 
         {/* Small Size Skill Boxes distributed along the 3D Orbit */}
         {skills.map((skill, index) => {
-          const angle = (rotationRef.current + (index * 2 * Math.PI) / count) % (2 * Math.PI);
+          const angle = (rotation + (index * 2 * Math.PI) / count) % (2 * Math.PI);
           const x = radii.rx * Math.cos(angle);
           const y = radii.ry * Math.sin(angle);
 
@@ -339,10 +379,13 @@ export function SkillsOrbitalRing({
           const tangentDeg = (tangentRad * 180) / Math.PI;
 
           const isHovered = hoveredSkillId === skill.id;
+          const cardW = isMobileScreen ? 106 : 124;
+          const cardH = isMobileScreen ? 72 : 82;
 
           return (
             <div
               key={skill.id}
+              suppressHydrationWarning
               onClick={(e) => {
                 e.stopPropagation();
                 playClick();
@@ -359,16 +402,16 @@ export function SkillsOrbitalRing({
               }}
               className="absolute left-0 top-0 cursor-pointer pointer-events-auto group"
               style={{
-                width: "124px",
-                height: "82px",
-                marginLeft: "-62px",
-                marginTop: "-41px",
+                width: `${cardW}px`,
+                height: `${cardH}px`,
+                marginLeft: `-${cardW / 2}px`,
+                marginTop: `-${cardH / 2}px`,
                 zIndex: isHovered ? 999 : zIndex,
                 transformStyle: "preserve-3d",
-                transform: `translate3d(${x}px, ${y}px, ${isHovered ? 50 : 0
-                  }px) rotateZ(${tangentDeg * 0.5}deg) rotateX(-52deg) scale(${isHovered ? depthScale * 1.18 : depthScale
+                transform: `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${isHovered ? 50 : 0
+                  }px) rotateZ(${(tangentDeg * 0.5).toFixed(2)}deg) rotateX(-52deg) scale(${isHovered ? (depthScale * 1.18).toFixed(3) : depthScale.toFixed(3)
                   })`,
-                opacity: isHovered ? 1 : depthOpacity,
+                opacity: isHovered ? 1 : Number(depthOpacity.toFixed(3)),
                 transition: isDragging
                   ? "none"
                   : "transform 0.15s ease-out, opacity 0.15s ease-out",

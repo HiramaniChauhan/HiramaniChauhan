@@ -52,7 +52,7 @@ export function ProjectModal() {
         onClick={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
         data-lenis-prevent
-        className="relative w-full max-w-4xl max-h-[85vh] sm:max-h-[88vh] overflow-y-auto overscroll-contain bg-[#111217] border border-white/10 rounded-2xl shadow-2xl text-[#edece8] p-6 sm:p-8 flex flex-col gap-6 custom-modal-scroll"
+        className="relative w-full max-w-4xl max-h-[90vh] sm:max-h-[88vh] overflow-y-auto overscroll-contain bg-[#111217] border border-white/10 rounded-2xl shadow-2xl text-[#edece8] p-4 sm:p-6 md:p-8 flex flex-col gap-5 sm:gap-6 custom-modal-scroll"
         style={{
           WebkitOverflowScrolling: "touch",
         }}
@@ -75,11 +75,11 @@ export function ProjectModal() {
         `}</style>
 
         {/* Sticky Header Bar */}
-        <div className="sticky -top-6 sm:-top-8 -mt-6 sm:-mt-8 -mx-6 sm:-mx-8 px-6 sm:px-8 pt-6 sm:pt-8 pb-4 bg-[#111217]/95 backdrop-blur-md z-20 flex items-start justify-between gap-4 border-b border-white/10 rounded-t-2xl">
-          <div className="flex flex-col gap-1.5">
-            <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="sticky -top-4 sm:-top-6 md:-top-8 -mt-4 sm:-mt-6 md:-mt-8 -mx-4 sm:-mx-6 md:-mx-8 px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 pb-3.5 sm:pb-4 bg-[#111217]/95 backdrop-blur-md z-20 flex items-start justify-between gap-3 sm:gap-4 border-b border-white/10 rounded-t-2xl">
+          <div className="flex flex-col gap-1 sm:gap-1.5">
+            <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
               <span
-                className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium border"
+                className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-medium border"
                 style={{
                   color: selectedProject.planetColor,
                   borderColor: `${selectedProject.planetColor}50`,
@@ -88,11 +88,11 @@ export function ProjectModal() {
               >
                 {selectedProject.category}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
                 STATUS: {selectedProject.status}
               </span>
             </div>
-            <h2 id="project-modal-title" className="text-2xl sm:text-3xl font-serif text-[#f2f4ec] font-normal tracking-tight mt-1">
+            <h2 id="project-modal-title" className="text-xl sm:text-2xl md:text-3xl font-serif text-[#f2f4ec] font-normal tracking-tight mt-0.5 sm:mt-1">
               {selectedProject.title}
             </h2>
             <p className="text-xs sm:text-sm text-[#c2b9d0] font-mono">
@@ -103,15 +103,15 @@ export function ProjectModal() {
           <button
             onClick={handleClose}
             onMouseEnter={playHover}
-            className="p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-[#b9c7a5]/20 hover:border-[#b9c7a5] text-slate-300 hover:text-white transition-colors"
+            className="p-1.5 sm:p-2 rounded-xl bg-white/5 border border-white/10 hover:bg-[#b9c7a5]/20 hover:border-[#b9c7a5] text-slate-300 hover:text-white transition-colors shrink-0"
             aria-label="Close Project Modal"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 
         {/* Action CTAs */}
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
           {selectedProject.demoUrl && (
             <a
               href={selectedProject.demoUrl}
@@ -119,9 +119,9 @@ export function ProjectModal() {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-bold hover:bg-[#c8d6b4] transition-all shadow-md shadow-[#b9c7a5]/20"
+              className="flex-1 min-[420px]:flex-initial justify-center inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-bold hover:bg-[#c8d6b4] transition-all shadow-md shadow-[#b9c7a5]/20"
             >
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Live Demo
               {selectedProject.isPlaceholderDemo && (
                 <span className="text-[10px] opacity-75 font-normal">(Preview URL)</span>
@@ -136,9 +136,9 @@ export function ProjectModal() {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs font-mono hover:bg-white/10 transition-all"
+              className="flex-1 min-[420px]:flex-initial justify-center inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-xs font-mono hover:bg-white/10 transition-all"
             >
-              <GithubIcon className="w-4 h-4 text-[#b9c7a5]" />
+              <GithubIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#b9c7a5]" />
               Source Code
               {selectedProject.isPlaceholderGithub && (
                 <span className="text-[10px] text-slate-400">(Configurable)</span>

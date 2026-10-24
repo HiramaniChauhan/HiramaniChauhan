@@ -5,9 +5,41 @@ import { Search, Orbit, Rows3, Grid3X3 } from "lucide-react";
 import { SKILL_CATEGORIES, SKILLS_DATA, SkillItem } from "@/data/skills";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
+import dynamic from "next/dynamic";
 import { DotMatrixBackground } from "@/components/ui/DotMatrixBackground";
-import { SkillsOrbitalRing } from "@/components/ui/SkillsOrbitalRing";
 import { SkillSpotlightModal } from "@/components/ui/SkillSpotlightModal";
+
+const SkillsOrbitalRing = dynamic(
+  () =>
+    import("@/components/ui/SkillsOrbitalRing").then(
+      (mod) => mod.SkillsOrbitalRing
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="relative w-full h-[460px] sm:h-[600px] md:h-[720px] flex items-center justify-center select-none overflow-visible"
+        style={{
+          perspective: "1200px",
+          perspectiveOrigin: "50% 50%",
+        }}
+      >
+        <div
+          className="relative w-0 h-0"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: "rotateX(52deg) rotateZ(-22deg)",
+          }}
+        >
+          <div
+            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.04] pointer-events-none"
+            style={{ width: "760px", height: "540px" }}
+          />
+        </div>
+      </div>
+    ),
+  }
+);
 
 export function SkillsSection() {
   const activeSkillFilter = usePortfolioStore((state) => state.activeSkillFilter);

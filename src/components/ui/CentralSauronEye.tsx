@@ -24,9 +24,10 @@ export function CentralSauronEye({ className = "" }: CentralSauronEyeProps) {
   // Initialize mouse position to default center-left if not moved yet
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768;
       mousePosRef.current = {
-        x: window.innerWidth * 0.28,
-        y: window.innerHeight * 0.46,
+        x: isMobile ? window.innerWidth * 0.5 : window.innerWidth * 0.28,
+        y: isMobile ? window.innerHeight * 0.28 : window.innerHeight * 0.46,
       };
       smoothMouseRef.current = { ...mousePosRef.current };
     }
@@ -35,7 +36,7 @@ export function CentralSauronEye({ className = "" }: CentralSauronEyeProps) {
       mousePosRef.current = { x: e.clientX, y: e.clientY };
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
+    const handleTouch = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         mousePosRef.current = {
           x: e.touches[0].clientX,
@@ -45,11 +46,13 @@ export function CentralSauronEye({ className = "" }: CentralSauronEyeProps) {
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchstart", handleTouch, { passive: true });
+    window.addEventListener("touchmove", handleTouch, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchstart", handleTouch);
+      window.removeEventListener("touchmove", handleTouch);
     };
   }, []);
 
@@ -155,9 +158,10 @@ export function CentralSauronEye({ className = "" }: CentralSauronEyeProps) {
           const perpY = ux;
 
           // Controlled ray spread - starts at eye center slit, ends cleanly at mouse cursor
-          const r0 = 4.0; // Half-width at eye aperture
-          // Full-sized spotlight beam spread (kept same as before, up to 48px radius / 96px width)
-          const r1 = Math.min(18 + len * 0.08, 48);
+          const isMobileViewport = typeof window !== "undefined" && window.innerWidth < 640;
+          const r0 = isMobileViewport ? 3.0 : 4.0; // Half-width at eye aperture
+          // Spotlight beam spread scaled gracefully for mobile and desktop
+          const r1 = Math.min(14 + len * 0.07, isMobileViewport ? 32 : 48);
 
           ctx.save();
 

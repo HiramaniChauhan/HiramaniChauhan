@@ -36,25 +36,25 @@ export function HeroSection() {
           {/* Subtle horizontal blueprint alignment guide (inspired by Veyronix banner texture) */}
           <div className="w-full max-w-md h-px bg-gradient-to-r from-[#b9c7a5]/40 via-white/10 to-transparent mb-5 pointer-events-none" />
 
-          <div className="flex flex-col select-none font-veyronix tracking-[-0.02em]">
+          <div className="flex flex-col select-none font-veyronix tracking-[-0.02em] max-w-full">
             {/* HIRAMANI with custom architectural "H" glyph */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[6.25rem] text-[#f2f4ec] font-black leading-[0.92] flex items-center flex-wrap">
-              <span className="inline-flex items-center">
+            <h1 className="text-[2rem] min-[370px]:text-[2.4rem] min-[440px]:text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[6.25rem] text-[#f2f4ec] font-black leading-[0.92] flex items-center flex-wrap">
+              <span className="inline-flex items-center whitespace-nowrap">
                 <HLogoGlyph className="h-[0.74em] w-auto inline-block text-[#f2f4ec] mr-[0.06em] flex-shrink-0 align-middle drop-shadow-[0_4px_16px_rgba(255,255,255,0.12)]" />
                 <span>IRAMANI</span>
               </span>
             </h1>
 
             {/* CHAUHAN with custom architectural "H" glyphs */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[6.25rem] text-[#f2f4ec] font-black leading-[0.92] flex items-center flex-wrap mt-1">
-              <span className="inline-flex items-center text-[#c2b9d0]">
+            <h1 className="text-[2rem] min-[370px]:text-[2.4rem] min-[440px]:text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem] xl:text-[6.25rem] text-[#f2f4ec] font-black leading-[0.92] flex items-center flex-wrap mt-1">
+              <span className="inline-flex items-center text-[#c2b9d0] whitespace-nowrap">
                 <span>C</span>
                 <HLogoGlyph className="h-[0.74em] w-auto inline-block text-[#c2b9d0] mx-[0.03em] flex-shrink-0 align-middle drop-shadow-[0_4px_16px_rgba(194,185,208,0.12)]" />
                 <span>AU</span>
                 <HLogoGlyph className="h-[0.74em] w-auto inline-block text-[#c2b9d0] mx-[0.03em] flex-shrink-0 align-middle drop-shadow-[0_4px_16px_rgba(194,185,208,0.12)]" />
                 <span>AN</span>
               </span>
-              <span className="inline-block w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-[#b9c7a5] ml-2 mb-2 shadow-sm shadow-[#b9c7a5]/40" />
+              <span className="inline-block w-2.5 h-2.5 sm:w-4 sm:h-4 rounded-full bg-[#b9c7a5] ml-2 mb-1.5 shadow-sm shadow-[#b9c7a5]/40" />
             </h1>
           </div>
 

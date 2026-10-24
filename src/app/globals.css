@@ -17,13 +17,21 @@
     scroll-behavior: smooth;
     background-color: #0c0d12;
     color: #edece8;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
     background-color: #0c0d12;
     color: #edece8;
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
     font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Editorial Serif Font helper */

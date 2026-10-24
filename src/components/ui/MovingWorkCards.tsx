@@ -34,6 +34,8 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
   const velXRef = useRef(0);
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
+  const touchStartPosRef = useRef({ x: 0, y: 0 });
+  const touchLockAxisRef = useRef<"horizontal" | "vertical" | null>(null);
   const animFrameRef = useRef<number | null>(null);
 
   // Drag handlers
@@ -59,13 +61,16 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
 
   const handleMouseUp = useCallback(() => {
     isDraggingRef.current = false;
+    touchLockAxisRef.current = null;
   }, []);
 
-  // Touch handlers
+  // Touch handlers with axis-locking so vertical page scroll is never blocked
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length > 0) {
       isDraggingRef.current = true;
       lastMousePosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      touchStartPosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      touchLockAxisRef.current = null;
       velYRef.current = 0;
       velXRef.current = 0;
     }
@@ -73,15 +78,30 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
     if (!isDraggingRef.current || e.touches.length === 0) return;
-    const dx = e.touches[0].clientX - lastMousePosRef.current.x;
-    const dy = e.touches[0].clientY - lastMousePosRef.current.y;
-    lastMousePosRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    const clientX = e.touches[0].clientX;
+    const clientY = e.touches[0].clientY;
+
+    const totalDx = Math.abs(clientX - touchStartPosRef.current.x);
+    const totalDy = Math.abs(clientY - touchStartPosRef.current.y);
+
+    if (!touchLockAxisRef.current && (totalDx > 8 || totalDy > 8)) {
+      touchLockAxisRef.current = totalDx >= totalDy ? "horizontal" : "vertical";
+    }
+
+    if (touchLockAxisRef.current === "vertical") {
+      // User is scrolling the page vertically — don't rotate cards
+      return;
+    }
+
+    const dx = clientX - lastMousePosRef.current.x;
+    const dy = clientY - lastMousePosRef.current.y;
+    lastMousePosRef.current = { x: clientX, y: clientY };
 
     velYRef.current = dx * 0.5;
-    velXRef.current = -dy * 0.4;
+    velXRef.current = -dy * 0.25;
     rotYRef.current += dx * 0.5;
-    rotXRef.current += -dy * 0.4;
-    scrollOffsetRef.current -= dy * 0.8;
+    rotXRef.current += -dy * 0.25;
+    scrollOffsetRef.current -= dy * 0.6;
   }, []);
 
   // Wheel interaction
@@ -122,9 +142,14 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
     if (mode === "grid") return;
 
     const total = items.length;
-    const radius = 420; // 3D cylinder/orbit radius in pixels
 
     const render = () => {
+      const winW = typeof window !== "undefined" ? window.innerWidth : 1200;
+      const isMobile = winW < 640;
+      const isTablet = winW < 1024;
+      const radius = isMobile ? Math.min(winW * 0.38, 160) : isTablet ? 280 : 420;
+      const yStep = isMobile ? 48 : 62;
+
       if (!isDraggingRef.current) {
         // Friction damping
         velYRef.current *= 0.94;
@@ -149,7 +174,6 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
           // Vertical Cylindrical Spiral (like 'S' mode in reference video)
           const angleStep = (Math.PI * 2) / (total * 0.55);
           const angle = i * angleStep + (currentRotY * Math.PI) / 180;
-          const yStep = 62;
           const baseY = (i - (total - 1) / 2) * yStep;
           const y = baseY + (scrollOffsetRef.current % (total * yStep * 0.5));
 
@@ -175,7 +199,7 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
           const angle = ((i / total) * Math.PI * 2) + (currentRotY * Math.PI) / 180;
           const x = Math.sin(angle) * (radius * 1.05);
           const z = Math.cos(angle) * (radius * 1.05) - (radius * 0.85);
-          const y = Math.sin(angle * 2) * 20; // gentle undulating wave
+          const y = Math.sin(angle * 2) * (isMobile ? 12 : 20); // gentle undulating wave
           const deg = (angle * 180) / Math.PI;
 
           const normZ = (z + radius * 2) / (radius * 2);
@@ -205,14 +229,14 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
   return (
     <div className="w-full flex flex-col items-center select-none">
       {/* Top Center Mode Switcher (S = Spiral / G = Grid / O = Orbit) matching reference video */}
-      <div className="flex items-center gap-1.5 p-1 rounded-full bg-[#131418]/90 border border-white/10 backdrop-blur-md mb-8 z-30 shadow-lg shadow-black/40">
+      <div className="flex items-center gap-2 p-1.5 rounded-full bg-[#131418]/90 border border-white/10 backdrop-blur-md mb-6 sm:mb-8 z-30 shadow-lg shadow-black/40">
         <button
           onClick={() => {
             playClick();
             setMode("spiral");
           }}
           onMouseEnter={playHover}
-          className={`w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs transition-all ${
+          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${
             mode === "spiral"
               ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
               : "text-[#8e94a0] hover:text-white"
@@ -228,7 +252,7 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
             setMode("grid");
           }}
           onMouseEnter={playHover}
-          className={`w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs transition-all ${
+          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${
             mode === "grid"
               ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
               : "text-[#8e94a0] hover:text-white"
@@ -244,7 +268,7 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
             setMode("orbit");
           }}
           onMouseEnter={playHover}
-          className={`w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs transition-all ${
+          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${
             mode === "orbit"
               ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
               : "text-[#8e94a0] hover:text-white"
@@ -262,13 +286,13 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
           ref={containerRef}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
-          className="relative w-full h-[520px] sm:h-[600px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing border border-white/[0.06] rounded-2xl bg-[#0a0b0e]"
+          className="relative w-full h-[460px] sm:h-[540px] md:h-[600px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing border border-white/[0.06] rounded-2xl bg-[#0a0b0e]"
           style={{ perspective: "1100px", perspectiveOrigin: "50% 50%" }}
         >
           {/* Subtle Ambient Instructions */}
-          <div className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between text-[11px] font-mono text-[#828795] pointer-events-none">
+          <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 z-20 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#828795] pointer-events-none">
             <span className="px-2.5 py-1 rounded-full bg-[#131418]/80 border border-white/10 text-[#b9c7a5]">
-              {mode === "spiral" ? "3D SPIRAL CYLINDER" : "3D ORBIT RING"} // DRAG OR SCROLL
+              {mode === "spiral" ? "3D SPIRAL" : "3D ORBIT"} {"//"} SWIPE
             </span>
             <span className="hidden sm:inline-block">CLICK CARD TO INSPECT</span>
           </div>
@@ -289,7 +313,7 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
                   onSelectProject(proj);
                 }}
                 onMouseEnter={playHover}
-                className="absolute top-[-110px] left-[-112px] sm:left-[-128px] w-56 sm:w-64 h-[220px] pointer-events-auto rounded-2xl p-4 bg-gradient-to-b from-[#15161c]/95 via-[#111217]/95 to-[#0c0d12]/95 border border-white/15 hover:border-[#b9c7a5] transition-[border-color,box-shadow] duration-200 cursor-pointer shadow-2xl hover:shadow-[#b9c7a5]/20 group flex flex-col justify-between"
+                className="absolute top-[-98px] left-[-96px] sm:top-[-110px] sm:left-[-112px] md:left-[-128px] w-48 sm:w-56 md:w-64 h-[195px] sm:h-[220px] pointer-events-auto rounded-2xl p-3.5 sm:p-4 bg-gradient-to-b from-[#15161c]/95 via-[#111217]/95 to-[#0c0d12]/95 border border-white/15 hover:border-[#b9c7a5] transition-[border-color,box-shadow] duration-200 cursor-pointer shadow-2xl hover:shadow-[#b9c7a5]/20 group flex flex-col justify-between"
                 style={{ willChange: "transform, opacity" }}
               >
                 {/* Card Header: Category & Index */}

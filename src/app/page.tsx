@@ -20,7 +20,7 @@ export default function Home() {
   useActiveSection();
 
   return (
-    <div className="relative min-h-screen bg-[#060916] text-[#e2e8f0] selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="relative min-h-screen w-full max-w-full overflow-x-hidden bg-[#060916] text-[#e2e8f0] selection:bg-cyan-500/30 selection:text-cyan-200">
       {/* Background Cosmic Star Grid */}
       <div className="fixed inset-0 cosmic-grid pointer-events-none z-0 opacity-25" />
 
@@ -28,7 +28,7 @@ export default function Home() {
       <Navbar />
 
       {/* Main Content Sections (All 8 Sections in exact requested order) */}
-      <main id="main-content" className="relative z-10 flex flex-col w-full">
+      <main id="main-content" className="relative z-10 flex flex-col w-full max-w-full overflow-x-hidden">
         {/* Section 1: HOME */}
         <HeroSection />
 
