@@ -47,8 +47,8 @@ export function AboutSection() {
 
           </div>
 
-          {/* Right Column: Personal Narrative (Inspired by Reference) */}
-          <div className="lg:col-span-7 flex flex-col gap-6 text-[#9da2af] leading-relaxed font-sans">
+          {/* Right Column: Personal Narrative */}
+          <div className="lg:col-span-7 flex flex-col gap-6 text-[#9da2af] leading-relaxed font-mono">
             {/* Top Intro Block */}
             <div className="flex flex-col gap-3">
               <span className="text-xs font-mono uppercase tracking-widest text-[#828795]">
@@ -57,7 +57,7 @@ export function AboutSection() {
               <h3 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight leading-[1.08]">
                 Hi, I&apos;m <span className="italic text-[#c2b9d0]">Hiramani.</span>
               </h3>
-              <p className="text-base sm:text-lg text-[#b8bcc8] font-sans leading-relaxed pt-1">
+              <p className="text-xs sm:text-sm text-[#9da2af] font-mono leading-relaxed pt-1">
                 I&apos;m studying computer applications at NIT Tiruchirappalli, and building projects to understand software from the inside out.
               </p>
             </div>
@@ -70,7 +70,7 @@ export function AboutSection() {
               <h4 className="text-2xl sm:text-3xl font-serif text-[#f2f4ec] font-normal">
                 What interests me
               </h4>
-              <div className="space-y-4 text-sm sm:text-base text-[#9da2af] leading-relaxed font-sans">
+              <div className="space-y-4 text-xs sm:text-sm text-[#9da2af] leading-relaxed font-mono">
                 <p>
                   I like working on problems that cross layers: a network protocol underneath a downloader, a queue behind an application, or a retrieval pipeline behind an AI response.
                 </p>

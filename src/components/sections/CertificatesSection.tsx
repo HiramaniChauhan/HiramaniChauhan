@@ -87,7 +87,7 @@ export function CertificatesSection() {
                   Conducted by: <strong className="text-white font-medium">{cert.issuer}</strong>
                 </span>
 
-                <p className="text-sm sm:text-base text-[#9da2af] font-sans leading-relaxed mt-2">
+                <p className="text-xs sm:text-sm text-[#9da2af] font-mono leading-relaxed mt-2">
                   {cert.description}
                 </p>
               </div>

@@ -103,7 +103,7 @@ export function ExperienceSection() {
                     <span className="text-xs font-mono text-[#828795] font-semibold uppercase tracking-wider">
                       Key Contributions:
                     </span>
-                    <ul className="space-y-1.5 text-xs sm:text-sm text-[#9da2af] leading-relaxed font-sans">
+                    <ul className="space-y-1.5 text-xs sm:text-sm text-[#9da2af] leading-relaxed font-mono">
                       {exp.responsibilities.map((resp, rIdx) => (
                         <li key={rIdx} className="flex items-start gap-2">
                           <span className="text-[#b9c7a5] font-bold shrink-0 mt-0.5">›</span>
@@ -121,7 +121,7 @@ export function ExperienceSection() {
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           Measurable Outcomes
                         </span>
-                        <ul className="space-y-1 text-xs text-slate-300 font-sans">
+                        <ul className="space-y-1 text-xs text-[#9da2af] leading-relaxed font-mono">
                           {exp.outcomes.map((out, oIdx) => (
                             <li key={oIdx} className="flex items-start gap-1.5">
                               <span className="text-[#b9c7a5]">•</span>

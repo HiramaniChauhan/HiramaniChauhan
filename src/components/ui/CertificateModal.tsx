@@ -102,7 +102,7 @@ export function CertificateModal() {
 
         {/* Description & Competencies */}
         <div className="flex flex-col gap-3">
-          <p className="text-xs sm:text-sm text-[#9da2af] leading-relaxed font-sans">
+          <p className="text-xs sm:text-sm text-[#9da2af] leading-relaxed font-mono">
             {selectedCertificate.description}
           </p>
 
