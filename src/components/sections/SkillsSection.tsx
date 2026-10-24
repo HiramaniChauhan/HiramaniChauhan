@@ -44,7 +44,7 @@ export function SkillsSection() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2 text-xs font-mono text-[#828795] uppercase tracking-widest">
-              <span className="text-[#b9c7a5] font-bold">02 //</span> TECHNICAL CAPABILITIES
+              <span className="text-[#b9c7a5] font-bold">02 -</span> TECHNICAL CAPABILITIES
             </div>
             <div className="flex flex-col">
               <h2 className="text-3xl sm:text-5xl font-serif text-[#f2f4ec] font-normal tracking-tight">
@@ -61,11 +61,10 @@ export function SkillsSection() {
                 setViewMode("orbit");
               }}
               onMouseEnter={playHover}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                viewMode === "orbit"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${viewMode === "orbit"
                   ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold shadow-sm"
                   : "text-[#828795] hover:text-white"
-              }`}
+                }`}
               title="3D Orbital Ring"
             >
               <Orbit className="w-3.5 h-3.5" />
@@ -77,11 +76,10 @@ export function SkillsSection() {
                 setViewMode("flow");
               }}
               onMouseEnter={playHover}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                viewMode === "flow"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${viewMode === "flow"
                   ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold shadow-sm"
                   : "text-[#828795] hover:text-white"
-              }`}
+                }`}
               title="Cascade Stream"
             >
               <Rows3 className="w-3.5 h-3.5" />
@@ -93,11 +91,10 @@ export function SkillsSection() {
                 setViewMode("grid");
               }}
               onMouseEnter={playHover}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                viewMode === "grid"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${viewMode === "grid"
                   ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold shadow-sm"
                   : "text-[#828795] hover:text-white"
-              }`}
+                }`}
               title="Matrix Grid"
             >
               <Grid3X3 className="w-3.5 h-3.5" />
@@ -116,11 +113,10 @@ export function SkillsSection() {
                 setActiveSkillFilter("All");
               }}
               onMouseEnter={playHover}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all ${
-                activeSkillFilter === "All"
+              className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all ${activeSkillFilter === "All"
                   ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold"
                   : "bg-white/5 text-[#828795] hover:bg-white/10 hover:text-white"
-              }`}
+                }`}
             >
               All ({SKILLS_DATA.length})
             </button>
@@ -132,11 +128,10 @@ export function SkillsSection() {
                   setActiveSkillFilter(cat);
                 }}
                 onMouseEnter={playHover}
-                className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all ${
-                  activeSkillFilter === cat
+                className={`px-3 py-1.5 rounded-full text-xs font-mono whitespace-nowrap transition-all ${activeSkillFilter === cat
                     ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold"
                     : "bg-white/5 text-[#828795] hover:bg-white/10 hover:text-white"
-                }`}
+                  }`}
               >
                 {cat}
               </button>

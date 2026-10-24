@@ -18,7 +18,7 @@ export function AboutSection() {
         {/* Header */}
         <div className="flex flex-col gap-4 border-b border-white/10 pb-6">
           <div className="flex items-center gap-2 text-xs font-mono text-[#828795] uppercase tracking-widest">
-            <span className="text-[#b9c7a5] font-bold">06 //</span> BIOGRAPHICAL NOTES
+            <span className="text-[#b9c7a5] font-bold">06 -</span> BIOGRAPHICAL NOTES
           </div>
           <div className="flex flex-col">
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">

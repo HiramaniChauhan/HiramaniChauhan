@@ -289,62 +289,57 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
                   onSelectProject(proj);
                 }}
                 onMouseEnter={playHover}
-                className="absolute top-[-100px] left-[-110px] w-52 sm:w-60 pointer-events-auto rounded-xl p-2 bg-[#121318]/95 border border-white/15 hover:border-[#b9c7a5] transition-[border-color,box-shadow] duration-200 cursor-pointer shadow-2xl hover:shadow-[#b9c7a5]/20 group"
+                className="absolute top-[-110px] left-[-112px] sm:left-[-128px] w-56 sm:w-64 h-[220px] pointer-events-auto rounded-2xl p-4 bg-gradient-to-b from-[#15161c]/95 via-[#111217]/95 to-[#0c0d12]/95 border border-white/15 hover:border-[#b9c7a5] transition-[border-color,box-shadow] duration-200 cursor-pointer shadow-2xl hover:shadow-[#b9c7a5]/20 group flex flex-col justify-between"
                 style={{ willChange: "transform, opacity" }}
               >
-                {/* Media Container: Looping Cinematic Video Preview */}
-                <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-black/80 border border-white/[0.08]">
-                  {proj.videoUrl ? (
-                    <video
-                      src={proj.videoUrl}
-                      poster={proj.posterUrl}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[#16171d] flex items-center justify-center text-[#828795] text-xs font-mono">
-                      NO PREVIEW
-                    </div>
-                  )}
-
-                  {/* Top Category Badge */}
-                  <div className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[8.5px] font-mono flex items-center gap-1.5 pointer-events-none">
+                {/* Card Header: Category & Index */}
+                <div className="flex items-center justify-between pb-2.5 border-b border-white/[0.06]">
+                  <div className="flex items-center gap-1.5">
                     <span
                       className="w-1.5 h-1.5 rounded-full"
                       style={{ backgroundColor: proj.planetColor }}
                     />
-                    <span style={{ color: proj.planetColor }} className="font-semibold uppercase tracking-wider">
+                    <span
+                      style={{ color: proj.planetColor }}
+                      className="text-[9.5px] font-mono font-semibold uppercase tracking-wider"
+                    >
                       {proj.category}
                     </span>
                   </div>
-
-                  {/* Index Badge */}
-                  <div className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md border border-white/10 text-[8.5px] font-mono text-slate-300 pointer-events-none">
+                  <span className="text-[9.5px] font-mono text-[#828795] px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/10">
                     0{(proj.instanceIndex % 4) + 1}
-                  </div>
-
-                  {/* Bottom Vignette */}
-                  <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                  </span>
                 </div>
 
-                {/* Card Title & Bottom Trigger */}
-                <div className="p-2 pt-2.5 flex flex-col gap-1">
-                  <h3 className="text-xs sm:text-[13px] font-serif text-[#f2f4ec] font-normal group-hover:text-[#b9c7a5] transition-colors leading-snug truncate">
+                {/* Card Body: Title, Tagline & Tech Stack */}
+                <div className="flex flex-col gap-1.5 flex-1 justify-center py-2">
+                  <h3 className="text-xs sm:text-[13.5px] font-serif text-[#f2f4ec] font-normal group-hover:text-[#b9c7a5] transition-colors leading-snug line-clamp-2">
                     {proj.title}
                   </h3>
-                  <div className="flex items-center justify-between pt-1.5 border-t border-white/[0.06] text-[9.5px] font-mono text-[#b9c7a5]">
-                    <span className="flex items-center gap-1 group-hover:underline">
-                      Inspect
-                      <ChevronRight className="w-2.5 h-2.5 transition-transform group-hover:translate-x-0.5" />
-                    </span>
-                    <span className="text-[8.5px] text-[#626773] uppercase font-mono">
-                      {proj.status}
-                    </span>
+                  <p className="text-[10px] sm:text-[10.5px] text-[#8e94a0] font-sans leading-relaxed line-clamp-2">
+                    {proj.tagline}
+                  </p>
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {proj.techStack.slice(0, 3).map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-[8.5px] font-mono px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.08] text-slate-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
+                </div>
+
+                {/* Card Footer: Inspect & Status */}
+                <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] text-[9.5px] font-mono text-[#b9c7a5]">
+                  <span className="flex items-center gap-1 group-hover:underline">
+                    Inspect
+                    <ChevronRight className="w-2.5 h-2.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                  <span className="text-[8.5px] text-[#626773] uppercase font-mono">
+                    {proj.status}
+                  </span>
                 </div>
               </div>
             ))}
@@ -358,70 +353,58 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
           {PROJECTS_DATA.map((proj, idx) => (
             <div
               key={proj.id}
-              className="rounded-xl p-2 sm:p-2.5 bg-[#121318]/90 hover:bg-[#181a22] border border-white/[0.08] hover:border-[#b9c7a5]/40 transition-all duration-300 flex flex-col justify-between group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5"
+              className="rounded-2xl p-4 bg-gradient-to-b from-[#15161c]/95 via-[#111217]/95 to-[#0c0d12]/95 hover:bg-[#181a22] border border-white/[0.08] hover:border-[#b9c7a5]/40 transition-all duration-300 flex flex-col justify-between min-h-[220px] group cursor-pointer shadow-sm hover:shadow-xl hover:-translate-y-0.5"
               onClick={() => onSelectProject(proj)}
               onMouseEnter={playHover}
             >
-              {/* Media Container: Looping Cinematic Video Preview */}
-              <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-black/60 border border-white/[0.06]">
-                {proj.videoUrl ? (
-                  <video
-                    src={proj.videoUrl}
-                    poster={proj.posterUrl}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-[#16171d] flex items-center justify-center text-[#828795] text-xs font-mono">
-                    NO PREVIEW
-                  </div>
-                )}
-
-                {/* Top Subtle Category Pill */}
-                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[9px] font-mono flex items-center gap-1.5 pointer-events-none">
+              {/* Header: Category & Index */}
+              <div className="flex items-center justify-between pb-2.5 border-b border-white/[0.06]">
+                <div className="flex items-center gap-1.5">
                   <span
                     className="w-1.5 h-1.5 rounded-full"
                     style={{ backgroundColor: proj.planetColor }}
                   />
-                  <span style={{ color: proj.planetColor }} className="font-semibold uppercase tracking-wider">
+                  <span
+                    style={{ color: proj.planetColor }}
+                    className="text-[10px] font-mono font-semibold uppercase tracking-wider"
+                  >
                     {proj.category}
                   </span>
                 </div>
-
-                {/* Top Index Badge */}
-                <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-black/70 backdrop-blur-md border border-white/10 text-[9px] font-mono text-slate-300 pointer-events-none">
+                <span className="text-[9.5px] font-mono text-[#828795] px-1.5 py-0.5 rounded bg-white/[0.04] border border-white/10">
                   0{idx + 1}
-                </div>
-
-                {/* Bottom subtle vignette */}
-                <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                </span>
               </div>
 
-              {/* Card Metadata */}
-              <div className="p-2 pt-2.5 flex flex-col gap-1.5">
-                <div>
-                  <h3 className="text-xs sm:text-[13px] font-serif text-[#f2f4ec] font-normal group-hover:text-[#b9c7a5] transition-colors leading-snug truncate">
-                    {proj.title}
-                  </h3>
-                  <p className="mt-0.5 text-[10.5px] text-[#8e94a0] font-sans leading-relaxed line-clamp-1">
-                    {proj.tagline}
-                  </p>
+              {/* Title & Tagline & Tech Stack */}
+              <div className="flex flex-col gap-1.5 flex-1 justify-center py-2.5">
+                <h3 className="text-xs sm:text-[13.5px] font-serif text-[#f2f4ec] font-normal group-hover:text-[#b9c7a5] transition-colors leading-snug line-clamp-2">
+                  {proj.title}
+                </h3>
+                <p className="text-[10.5px] text-[#8e94a0] font-sans leading-relaxed line-clamp-2">
+                  {proj.tagline}
+                </p>
+                <div className="flex flex-wrap gap-1 mt-1.5">
+                  {proj.techStack.slice(0, 3).map((tech, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/[0.03] border border-white/[0.08] text-slate-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
+              </div>
 
-                {/* Bottom Trigger Row */}
-                <div className="flex items-center justify-between pt-1.5 border-t border-white/[0.06] text-[10px] font-mono text-[#b9c7a5]">
-                  <span className="flex items-center gap-1 group-hover:underline">
-                    Inspect
-                    <ChevronRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
-                  </span>
-                  <span className="text-[9px] text-[#626773] uppercase font-mono">
-                    {proj.status}
-                  </span>
-                </div>
+              {/* Bottom Trigger Row */}
+              <div className="flex items-center justify-between pt-2.5 border-t border-white/[0.06] text-[10px] font-mono text-[#b9c7a5]">
+                <span className="flex items-center gap-1 group-hover:underline">
+                  Inspect
+                  <ChevronRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+                </span>
+                <span className="text-[9px] text-[#626773] uppercase font-mono">
+                  {proj.status}
+                </span>
               </div>
             </div>
           ))}

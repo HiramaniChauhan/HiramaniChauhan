@@ -372,7 +372,7 @@ export function ContactSection() {
         {/* Header */}
         <div className="flex flex-col gap-4 border-b border-white/10 pb-6">
           <div className="flex items-center gap-2 text-xs font-mono text-[#828795] uppercase tracking-widest">
-            <span className="text-[#b9c7a5] font-bold">07 //</span> DIRECT
+            <span className="text-[#b9c7a5] font-bold">07 -</span> DIRECT
             COMMUNICATIONS
           </div>
           <div className="flex flex-col">
