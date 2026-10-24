@@ -63,13 +63,12 @@ export function ContactSection() {
     setErrorMessage("");
     try {
       await new Promise((res) => setTimeout(res, 800));
-      const mailtoUrl = `mailto:${
-        PROFILE_DATA.socials.email
-      }?subject=${encodeURIComponent(
-        formState.subject || "Message via Portfolio"
-      )}&body=${encodeURIComponent(
-        `From: ${formState.name} (${formState.email})\n\n${formState.message}`
-      )}`;
+      const mailtoUrl = `mailto:${PROFILE_DATA.socials.email
+        }?subject=${encodeURIComponent(
+          formState.subject || "Message via Portfolio"
+        )}&body=${encodeURIComponent(
+          `From: ${formState.name} (${formState.email})\n\n${formState.message}`
+        )}`;
       window.location.href = mailtoUrl;
       playChime(784, 0.4);
       setStatus("success");
@@ -380,13 +379,9 @@ export function ContactSection() {
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#f2f4ec] font-normal tracking-tight">
               Initiate contact.
             </h2>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif italic text-[#c2b9d0] font-normal tracking-tight">
-              Open the envelope.
-            </h2>
+
           </div>
-          <p className="text-xs sm:text-sm text-[#828795] max-w-2xl font-mono">
-            Click the envelope — the message form will emerge from within.
-          </p>
+
         </div>
 
         {/* 2 Column: Envelope + Side Panel */}
@@ -561,9 +556,8 @@ export function ContactSection() {
 
         {/* Letter card */}
         <div
-          className={`letter-card ${
-            letterVisible ? "at-center" : isOpen ? "at-envelope" : "at-envelope"
-          }`}
+          className={`letter-card ${letterVisible ? "at-center" : isOpen ? "at-envelope" : "at-envelope"
+            }`}
         >
           {/* Close button */}
           {letterVisible && (

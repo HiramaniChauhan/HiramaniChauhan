@@ -32,8 +32,7 @@ export function AboutSection() {
           {/* Left Column: AIR-06 in NIMCET 2024 (Simple, No Background Card) */}
           <div className="lg:col-span-5 flex flex-col justify-center gap-4 py-4">
             <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#b9c7a5] font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#b9c7a5]" />
-              <span>NIMCET 2024 • ALL INDIA RANK</span>
+
             </div>
 
             <div className="flex flex-col gap-1.5">
@@ -45,9 +44,7 @@ export function AboutSection() {
               </div>
             </div>
 
-            <p className="text-xs sm:text-sm font-mono text-[#828795]">
-              Ranked 6th nationwide in the National Institute of Technology MCA Common Entrance Test.
-            </p>
+
           </div>
 
           {/* Right Column: Personal Narrative (Inspired by Reference) */}

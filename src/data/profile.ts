@@ -39,10 +39,9 @@ export const PROFILE_DATA: ProfileData = {
     "Software engineer specialized in Generative AI, PyTorch deep learning pipelines, high-concurrency backend services, and interactive web experiences.",
   tagline: "Bridging mathematical rigor, neural architectures, and performant user interfaces.",
   socials: {
-    email: "hiramanichauhan@gmail.com",
+    email: "hiramanichauhan2399@gmail.com",
     github: "https://github.com/HiramaniChauhan",
     linkedin: "https://www.linkedin.com/in/hiramanichauhan",
-    twitter: "https://x.com/hiramanichauhan",
   },
   resumeUrl: "https://drive.google.com/drive/folders/1jmYiL78oZmQfJjXGmw12g2UGCyl-bA-T?usp=sharing",
   aboutStory: {

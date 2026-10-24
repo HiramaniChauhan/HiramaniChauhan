@@ -67,7 +67,6 @@ export const metadata: Metadata = {
     title: "Hiramani Chauhan | CODEVERSE",
     description:
       "AI / GenAI Engineer | Full Stack Developer | Software Engineer. Explore projects in a 3D universe.",
-    creator: "@hiramanichauhan",
   },
   robots: {
     index: true,

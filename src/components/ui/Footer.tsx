@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ArrowUp, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { PROFILE_DATA } from "@/data/profile";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
@@ -86,19 +86,6 @@ export function Footer() {
             >
               <Mail className="w-4 h-4" />
             </a>
-            {PROFILE_DATA.socials.twitter && (
-              <a
-                href={PROFILE_DATA.socials.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                onMouseEnter={playHover}
-                onClick={playClick}
-                className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#b9c7a5]/40 hover:bg-[#b9c7a5]/10 text-slate-300 hover:text-[#b9c7a5] transition-all"
-                aria-label="X (Twitter)"
-              >
-                <TwitterIcon className="w-4 h-4" />
-              </a>
-            )}
 
             {/* Back to top button */}
             <button
@@ -115,12 +102,8 @@ export function Footer() {
 
         {/* Sub-footer details */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#828795]">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#b9c7a5] animate-pulse" />
-            <span>TELEMETRY NOMINAL // SECTOR 01</span>
-          </div>
           <div>
-            © 2026 Hiramani Chauhan. Built with Next.js, Three.js, R3F & Tailwind.
+            © 2026 Hiramani Chauhan.
           </div>
         </div>
       </div>
