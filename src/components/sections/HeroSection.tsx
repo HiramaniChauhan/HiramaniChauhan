@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowDown, FileText, Compass } from "lucide-react";
+import { FileText, Compass } from "lucide-react";
 import { SceneContainer } from "@/components/3d/SceneContainer";
 import { Hero3DCore } from "@/components/3d/Hero3DCore";
 import { HLogoGlyph } from "@/components/ui/HLogoGlyph";
@@ -15,7 +15,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden pt-24 pb-8 px-4 sm:px-8 lg:px-12 bg-[#0c0d12]"
+      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden py-20 px-4 sm:px-8 lg:px-12 bg-[#0c0d12]"
       aria-label="Home / Hero"
     >
       {/* 3D WebGL Background Canvas - Atmospheric architectural corridor */}
@@ -28,18 +28,6 @@ export function HeroSection() {
       {/* Atmospheric Soft Vignette Scrim */}
       <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(12,13,18,0.5)_70%,#0c0d12_100%)]" />
       <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-[#0c0d12]/50 via-transparent to-[#0c0d12]" />
-
-      {/* Top Telemetry Overlay */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto flex items-start justify-between text-xs font-mono text-[#828795]">
-        <div className="flex items-center gap-2.5">
-          <div className="w-6 h-6 rounded border border-white/10 bg-[#121317]/80 flex items-center justify-center text-[#b9c7a5]">
-            <HLogoGlyph className="w-3.5 h-3.5 text-[#b9c7a5]" />
-          </div>
-          <span className="text-[#b9c7a5] font-bold">01 //</span>
-          <span className="tracking-widest uppercase text-slate-300">CODEVERSE • ARCHIVE</span>
-        </div>
-
-      </div>
 
       {/* Central Hero Section: Monumental Name + Central Sauron Eye focusing yellow light on mouse */}
       <div className="relative z-10 w-full max-w-7xl mx-auto my-auto py-8 sm:py-12 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
@@ -111,31 +99,6 @@ export function HeroSection() {
         {/* Center Focal Eye: The Eye of Sauron focused on the mouse cursor */}
         <div className="w-full lg:w-auto flex-1 flex items-center justify-center z-10 py-6 lg:py-0">
           <CentralSauronEye />
-        </div>
-      </div>
-
-      {/* Bottom Architectural Metadata Bar */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto pt-6 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] font-mono text-[#828795]">
-        {/* Scroll Indicator */}
-        <a
-          href="#work"
-          onClick={playClick}
-          className="flex items-center gap-2 text-slate-300 hover:text-[#b9c7a5] transition-colors group"
-        >
-          <span className="tracking-widest uppercase">SCROLL TO EXPLORE</span>
-          <div className="w-6 h-6 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#b9c7a5] transition-colors">
-            <ArrowDown className="w-3 h-3 text-[#b9c7a5] transition-transform group-hover:translate-y-0.5" />
-          </div>
-        </a>
-
-        {/* Center Pillars */}
-        <div className="tracking-widest uppercase text-slate-400 hidden md:block">
-          CODE • SYSTEMS • AI ARCHITECTURE
-        </div>
-
-        {/* Right Location Stamp */}
-        <div className="tracking-widest uppercase text-slate-400">
-          INDIA // REMOTE READY
         </div>
       </div>
     </section>

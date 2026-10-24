@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, Orbit, Rows3, Grid3X3, Sparkles } from "lucide-react";
+import { Search, Orbit, Rows3, Grid3X3 } from "lucide-react";
 import { SKILL_CATEGORIES, SKILLS_DATA, SkillItem } from "@/data/skills";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
@@ -32,27 +32,11 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="relative min-h-screen w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 flex flex-col justify-between overflow-hidden border-t border-white/5 bg-[#0a0b0e]"
+      className="relative min-h-screen w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-white/5 bg-[#0a0b0e]"
       aria-label="Skills Matrix"
     >
       {/* Authentic Reference Dot-Matrix Background (exact dot typography from reference video) */}
       <DotMatrixBackground text="SA20" />
-
-      {/* TOP EDITORIAL METADATA BAR (Exact styling from video frame) */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-start md:items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#828795] border-b border-white/10 pb-4 gap-4">
-        <div className="flex flex-col">
-          <span>BUILT FOR RESILIENT SYSTEMS,</span>
-          <span>HIGH-PERFORMANCE ARCHITECTURES</span>
-        </div>
-        <div className="hidden md:flex flex-col text-center">
-          <span className="text-[#f2f4ec] font-semibold">HIRAMANI CHAUHAN</span>
-          <span>SYSTEMS & AI ARCHITECT // FULL STACK CORE</span>
-        </div>
-        <div className="flex items-center gap-6 self-end md:self-auto">
-          <span className="text-[#b9c7a5]">S26</span>
-          <span>PORTFOLIO: HIRAMANICHAUHAN</span>
-        </div>
-      </div>
 
       {/* MAIN CONTAINER */}
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 relative z-10 my-auto py-6">
@@ -184,28 +168,6 @@ export function SkillsSection() {
             setHoveredSkillId={setHoveredSkillId}
             viewMode={viewMode}
           />
-        </div>
-      </div>
-
-      {/* BOTTOM EDITORIAL METADATA BAR (Exact styling from video frame) */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-start md:items-center justify-between text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#828795] border-t border-white/10 pt-4 gap-4">
-        <div className="flex flex-col">
-          <span>LANGUAGES & COMPILERS</span>
-          <span>DEEP LEARNING / LLMS</span>
-          <span>DISTRIBUTED BACKENDS</span>
-          <span>HIGH-PERFORMANCE FRONTEND</span>
-        </div>
-        <div className="hidden md:flex flex-col text-center">
-          <span className="text-[#f2f4ec]">CORE CAPABILITIES: PRODUCTION-READY</span>
-          <span className="text-[#b9c7a5] flex items-center justify-center gap-1">
-            <Sparkles className="w-2.5 h-2.5" /> 100% TYPESAFE & OBSERVABLE
-          </span>
-        </div>
-        <div className="flex flex-col text-right self-end md:self-auto">
-          <span>FULLY TYPESAFE</span>
-          <span>BENCHMARKED LATENCY</span>
-          <span>OPTIMIZED PERFORMANCE</span>
-          <span>INTERACTIVE 3D ORBIT</span>
         </div>
       </div>
 
