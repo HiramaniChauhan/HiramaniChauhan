@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect, useSyncExternalStore } from "react"
 import { SkillItem } from "@/data/skills";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 function useIsMounted() {
   return useSyncExternalStore(
@@ -19,7 +19,7 @@ interface SkillsOrbitalRingProps {
   onSelectSkill: (skill: SkillItem) => void;
   hoveredSkillId: string | null;
   setHoveredSkillId: (id: string | null) => void;
-  viewMode?: "orbit" | "flow" | "grid";
+  viewMode?: "orbit" | "grid";
 }
 
 export function SkillsOrbitalRing({
@@ -53,8 +53,8 @@ export function SkillsOrbitalRing({
     hoveredRef.current = hoveredSkillId;
   });
 
-  // Responsive radii
-  const [radii, setRadii] = useState({ rx: 380, ry: 270, rz: 320 });
+  // Responsive radii so "AI+SDE" sits completely and clearly inside the orbit
+  const [radii, setRadii] = useState({ rx: 540, ry: 360, rz: 420 });
   const [isMobileScreen, setIsMobileScreen] = useState(false);
 
   useEffect(() => {
@@ -64,13 +64,14 @@ export function SkillsOrbitalRing({
       setIsMobileScreen(width < 640);
 
       if (width < 420) {
-        setRadii({ rx: Math.max(width * 0.34, 115), ry: 85, rz: 110 });
+        setRadii({ rx: Math.max(width * 0.44, 160), ry: 130, rz: 160 });
       } else if (width < 640) {
-        setRadii({ rx: 155, ry: 115, rz: 145 });
+        setRadii({ rx: 240, ry: 170, rz: 210 });
       } else if (width < 1024) {
-        setRadii({ rx: 270, ry: 195, rz: 230 });
+        setRadii({ rx: 400, ry: 270, rz: 320 });
       } else {
-        setRadii({ rx: 380, ry: 265, rz: 320 });
+        // Desktop: orbit perfectly encloses "AI+SDE" with ample clearance
+        setRadii({ rx: 540, ry: 360, rz: 420 });
       }
     };
 
@@ -235,65 +236,7 @@ export function SkillsOrbitalRing({
     );
   }
 
-  // If in Flow view mode (vertical cascading tunnel from sec_06):
-  if (viewMode === "flow") {
-    return (
-      <div className="w-full max-w-4xl mx-auto py-12 flex flex-col items-center gap-6 px-4">
-        {skills.map((skill, idx) => {
-          const isHovered = hoveredSkillId === skill.id;
-          return (
-            <div
-              key={skill.id}
-              onClick={() => {
-                playClick();
-                onSelectSkill(skill);
-              }}
-              onMouseEnter={() => {
-                playHover();
-                setHoveredSkillId(skill.id);
-              }}
-              onMouseLeave={() => setHoveredSkillId(null)}
-              className={`w-full max-w-xl cursor-pointer select-none rounded-xl p-5 flex items-center justify-between transition-all duration-300 border ${isHovered
-                ? "bg-[#181a24] border-[#b9c7a5] scale-[1.02] shadow-[0_0_25px_rgba(185,199,165,0.25)]"
-                : "bg-[#111218]/85 border-white/10 hover:border-white/20"
-                }`}
-            >
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-mono text-[#828795] w-6">
-                  {String(idx + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="w-2.5 h-2.5 rounded-full"
-                  style={{
-                    backgroundColor: skill.color,
-                    boxShadow: `0 0 10px ${skill.color}`,
-                  }}
-                />
-                <div className="flex flex-col">
-                  <span className="text-base font-serif text-[#f2f4ec] font-normal">
-                    {skill.name}
-                  </span>
-                  <span className="text-[10px] font-mono text-[#828795] uppercase tracking-wider">
-                    {skill.category}
-                  </span>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                {skill.isCore && (
-                  <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-[#b9c7a5]/15 text-[#b9c7a5] border border-[#b9c7a5]/30">
-                    CORE SYSTEM
-                  </span>
-                )}
-                <span className="text-[10px] font-mono text-[#828795]">
-                  {skill.relatedProjects.length} PROJECTS
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
+
 
   // 3D ORBIT MODE (EXACT VIDEO MATCH)
   const count = skills.length;
@@ -302,9 +245,9 @@ export function SkillsOrbitalRing({
   if (!isMounted) {
     return (
       <div
-        className="relative w-full h-[460px] sm:h-[600px] md:h-[720px] flex items-center justify-center select-none overflow-visible"
+        className="relative w-full h-[540px] sm:h-[620px] md:h-[660px] flex items-center justify-center select-none overflow-visible"
         style={{
-          perspective: "1200px",
+          perspective: "1300px",
           perspectiveOrigin: "50% 50%",
         }}
       >
@@ -312,7 +255,7 @@ export function SkillsOrbitalRing({
           className="relative w-0 h-0"
           style={{
             transformStyle: "preserve-3d",
-            transform: "rotateX(52deg) rotateZ(-22deg)",
+            transform: "rotateX(48deg) rotateZ(-16deg)",
           }}
         >
           <div
@@ -334,9 +277,9 @@ export function SkillsOrbitalRing({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
-      className="relative w-full h-[460px] sm:h-[600px] md:h-[720px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-visible"
+      className="relative w-full h-[540px] sm:h-[620px] md:h-[660px] flex items-center justify-center select-none cursor-grab active:cursor-grabbing overflow-visible"
       style={{
-        perspective: "1200px",
+        perspective: "1300px",
         perspectiveOrigin: "50% 50%",
       }}
     >
@@ -345,7 +288,7 @@ export function SkillsOrbitalRing({
         className="relative w-0 h-0 transition-transform duration-75 ease-out"
         style={{
           transformStyle: "preserve-3d",
-          transform: `rotateX(${52 + mouseParallax.y}deg) rotateZ(${-22 + mouseParallax.x
+          transform: `rotateX(${48 + mouseParallax.y}deg) rotateZ(${-16 + mouseParallax.x
             }deg)`,
         }}
       >
@@ -379,8 +322,8 @@ export function SkillsOrbitalRing({
           const tangentDeg = (tangentRad * 180) / Math.PI;
 
           const isHovered = hoveredSkillId === skill.id;
-          const cardW = isMobileScreen ? 106 : 124;
-          const cardH = isMobileScreen ? 72 : 82;
+          const cardW = isMobileScreen ? 104 : 124;
+          const cardH = isMobileScreen ? 70 : 82;
 
           return (
             <div
@@ -409,7 +352,7 @@ export function SkillsOrbitalRing({
                 zIndex: isHovered ? 999 : zIndex,
                 transformStyle: "preserve-3d",
                 transform: `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, ${isHovered ? 50 : 0
-                  }px) rotateZ(${(tangentDeg * 0.5).toFixed(2)}deg) rotateX(-52deg) scale(${isHovered ? (depthScale * 1.18).toFixed(3) : depthScale.toFixed(3)
+                  }px) rotateZ(${(tangentDeg * 0.5).toFixed(2)}deg) rotateX(-48deg) scale(${isHovered ? (depthScale * 1.18).toFixed(3) : depthScale.toFixed(3)
                   })`,
                 opacity: isHovered ? 1 : Number(depthOpacity.toFixed(3)),
                 transition: isDragging

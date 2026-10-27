@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X, ExternalLink, AlertCircle, CheckCircle2, Cpu, Layers, Sparkles, ShieldAlert } from "lucide-react";
+import { X, ExternalLink, AlertCircle, CheckCircle2, Cpu, Layers, Sparkles, ShieldAlert, Video } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
@@ -145,6 +145,29 @@ export function ProjectModal() {
               )}
             </a>
           )}
+
+          {/* Video Demo Button beside GitHub button */}
+          <a
+            href={selectedProject.videoUrl || "#"}
+            target={selectedProject.videoUrl && selectedProject.videoUrl !== "#" ? "_blank" : undefined}
+            rel="noopener noreferrer"
+            onMouseEnter={playHover}
+            onClick={(e) => {
+              playClick();
+              if (!selectedProject.videoUrl || selectedProject.videoUrl === "#") {
+                e.preventDefault();
+                alert("Please paste your Google Drive video demo link in src/data/projects.ts for this project!");
+              }
+            }}
+            className="flex-1 min-[420px]:flex-initial justify-center inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono hover:bg-purple-500/20 hover:border-purple-400 transition-all shadow-sm"
+            title="Watch Video Demo on Google Drive"
+          >
+            <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />
+            <span>Video Demo</span>
+            {(!selectedProject.videoUrl || selectedProject.videoUrl === "#") && (
+              <span className="text-[10px] text-purple-400/70 font-normal">(Drive Link)</span>
+            )}
+          </a>
         </div>
 
         {/* Core Narrative: Problem & Solution */}

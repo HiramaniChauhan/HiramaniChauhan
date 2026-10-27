@@ -11,7 +11,7 @@ import {
   MessageSquare,
   X,
 } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import { PROFILE_DATA } from "@/data/profile";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
@@ -517,17 +517,17 @@ export function ContactSection() {
                 <span className="text-xs font-mono text-[#828795] uppercase tracking-wider">
                   Networks:
                 </span>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <a
                     href={PROFILE_DATA.socials.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={playClick}
                     onMouseEnter={playHover}
-                    className="p-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#b9c7a5]/40 hover:bg-[#b9c7a5]/10 transition-all flex items-center gap-2.5 group"
+                    className="p-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#b9c7a5]/40 hover:bg-[#b9c7a5]/10 transition-all flex items-center justify-center sm:justify-start gap-2.5 group"
                   >
                     <GithubIcon className="w-4 h-4 text-slate-400 group-hover:text-[#b9c7a5]" />
-                    <span className="text-xs font-mono text-slate-300 group-hover:text-white font-medium">
+                    <span className="text-xs font-mono text-slate-300 group-hover:text-white font-medium truncate">
                       GitHub
                     </span>
                   </a>
@@ -537,11 +537,31 @@ export function ContactSection() {
                     rel="noopener noreferrer"
                     onClick={playClick}
                     onMouseEnter={playHover}
-                    className="p-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#b9c7a5]/40 hover:bg-[#b9c7a5]/10 transition-all flex items-center gap-2.5 group"
+                    className="p-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#b9c7a5]/40 hover:bg-[#b9c7a5]/10 transition-all flex items-center justify-center sm:justify-start gap-2.5 group"
                   >
                     <LinkedinIcon className="w-4 h-4 text-slate-400 group-hover:text-[#b9c7a5]" />
-                    <span className="text-xs font-mono text-slate-300 group-hover:text-white font-medium">
+                    <span className="text-xs font-mono text-slate-300 group-hover:text-white font-medium truncate">
                       LinkedIn
+                    </span>
+                  </a>
+                  <a
+                    href={
+                      PROFILE_DATA.socials.whatsapp
+                        ? PROFILE_DATA.socials.whatsapp.startsWith("http")
+                          ? PROFILE_DATA.socials.whatsapp
+                          : `https://wa.me/${PROFILE_DATA.socials.whatsapp.replace(/[\s\-\+]/g, "")}`
+                        : "#"
+                    }
+                    target={PROFILE_DATA.socials.whatsapp ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    onClick={playClick}
+                    onMouseEnter={playHover}
+                    className="p-3 rounded-xl bg-white/[0.02] border border-white/10 hover:border-[#25D366]/50 hover:bg-[#25D366]/10 transition-all flex items-center justify-center sm:justify-start gap-2.5 group"
+                    title="Direct WhatsApp Message"
+                  >
+                    <WhatsappIcon className="w-4 h-4 text-slate-400 group-hover:text-[#25D366]" />
+                    <span className="text-xs font-mono text-slate-300 group-hover:text-white font-medium truncate">
+                      WhatsApp
                     </span>
                   </a>
                 </div>

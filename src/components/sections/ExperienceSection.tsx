@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Calendar, MapPin, CheckCircle2, Cpu } from "lucide-react";
+import { Calendar, MapPin, CheckCircle2, Cpu, ExternalLink } from "lucide-react";
 import { EXPERIENCES_DATA } from "@/data/experience";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
@@ -74,6 +74,17 @@ export function ExperienceSection() {
                       <span className="text-xs font-mono text-[#c2b9d0]">
                         {exp.companyOrOrg}
                       </span>
+                      {exp.website && (
+                        <a
+                          href={exp.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-mono text-[#b9c7a5] hover:text-[#d7e5c4] bg-[#b9c7a5]/10 px-2 py-0.5 rounded border border-[#b9c7a5]/25 hover:border-[#b9c7a5]/50 transition-colors ml-1"
+                        >
+                          <span>{exp.website.replace(/^https?:\/\//, "")}</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
                       {exp.isCustomizablePlaceholder && (
                         <span className="text-[10px] font-mono text-[#dfcaa5] px-2 py-0.5 rounded bg-white/5">
                           (Configurable in data/experience.ts)
@@ -96,6 +107,13 @@ export function ExperienceSection() {
                     </span>
                   </div>
                 </div>
+
+                {/* Optional Project / Role Description */}
+                {exp.description && (
+                  <p className="text-xs sm:text-sm text-[#b2b7c4] leading-relaxed font-sans border-b border-white/5 pb-3">
+                    {exp.description}
+                  </p>
+                )}
 
                 {/* Horizontal Content Split: Contributions (Left 7 cols) + Outcomes & Stack (Right 5 cols) */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-1 items-start">

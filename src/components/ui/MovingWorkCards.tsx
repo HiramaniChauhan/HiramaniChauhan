@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Video } from "lucide-react";
+import { GithubIcon } from "@/components/ui/BrandIcons";
 import { PROJECTS_DATA, Project } from "@/data/projects";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
@@ -236,11 +237,10 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
             setMode("spiral");
           }}
           onMouseEnter={playHover}
-          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${
-            mode === "spiral"
-              ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
-              : "text-[#8e94a0] hover:text-white"
-          }`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${mode === "spiral"
+            ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
+            : "text-[#8e94a0] hover:text-white"
+            }`}
           title="Spiral 3D Cylinder View"
           aria-label="Spiral View"
         >
@@ -252,11 +252,10 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
             setMode("grid");
           }}
           onMouseEnter={playHover}
-          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${
-            mode === "grid"
-              ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
-              : "text-[#8e94a0] hover:text-white"
-          }`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${mode === "grid"
+            ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
+            : "text-[#8e94a0] hover:text-white"
+            }`}
           title="Grid View"
           aria-label="Grid View"
         >
@@ -268,11 +267,10 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
             setMode("orbit");
           }}
           onMouseEnter={playHover}
-          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${
-            mode === "orbit"
-              ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
-              : "text-[#8e94a0] hover:text-white"
-          }`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs transition-all active:scale-95 ${mode === "orbit"
+            ? "bg-[#b9c7a5] text-[#0c0d10] font-bold shadow-md shadow-[#b9c7a5]/30 scale-105"
+            : "text-[#8e94a0] hover:text-white"
+            }`}
           title="Orbit Ring View"
           aria-label="Orbit View"
         >
@@ -289,13 +287,6 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
           className="relative w-full h-[460px] sm:h-[540px] md:h-[600px] flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing border border-white/[0.06] rounded-2xl bg-[#0a0b0e]"
           style={{ perspective: "1100px", perspectiveOrigin: "50% 50%" }}
         >
-          {/* Subtle Ambient Instructions */}
-          <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 z-20 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-[#828795] pointer-events-none">
-            <span className="px-2.5 py-1 rounded-full bg-[#131418]/80 border border-white/10 text-[#b9c7a5]">
-              {mode === "spiral" ? "3D SPIRAL" : "3D ORBIT"} {"//"} SWIPE
-            </span>
-            <span className="hidden sm:inline-block">CLICK CARD TO INSPECT</span>
-          </div>
 
           {/* 3D Preserved Space Container */}
           <div
@@ -355,15 +346,41 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
                   </div>
                 </div>
 
-                {/* Card Footer: Inspect & Status */}
-                <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] text-[9.5px] font-mono text-[#b9c7a5]">
-                  <span className="flex items-center gap-1 group-hover:underline">
+                {/* Card Footer: Inspect & Actions (GitHub + Video Demo) */}
+                <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] text-[9.5px] font-mono">
+                  <span className="flex items-center gap-1 text-[#b9c7a5] group-hover:underline">
                     Inspect
                     <ChevronRight className="w-2.5 h-2.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
-                  <span className="text-[8.5px] text-[#626773] uppercase font-mono">
-                    {proj.status}
-                  </span>
+                  <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+                    {proj.githubUrl && (
+                      <a
+                        href={proj.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-1 rounded bg-white/5 hover:bg-white/10 text-[#828795] hover:text-[#b9c7a5] transition-colors"
+                        title="GitHub Repository"
+                      >
+                        <GithubIcon className="w-3 h-3" />
+                      </a>
+                    )}
+                    <a
+                      href={proj.videoUrl || "#"}
+                      target={proj.videoUrl && proj.videoUrl !== "#" ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        if (!proj.videoUrl || proj.videoUrl === "#") {
+                          e.preventDefault();
+                          alert("Video demo Drive link will open once you paste your Google Drive URL in data/projects.ts!");
+                        }
+                      }}
+                      className="px-1.5 py-0.5 rounded bg-purple-500/15 hover:bg-purple-500/30 border border-purple-500/30 text-purple-300 transition-colors flex items-center gap-1 text-[8.5px]"
+                      title="Watch Video Demo on Google Drive"
+                    >
+                      <Video className="w-2.5 h-2.5 text-purple-400" />
+                      <span>Video</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -421,14 +438,41 @@ export function MovingWorkCards({ onSelectProject }: MovingWorkCardsProps) {
               </div>
 
               {/* Bottom Trigger Row */}
-              <div className="flex items-center justify-between pt-2.5 border-t border-white/[0.06] text-[10px] font-mono text-[#b9c7a5]">
-                <span className="flex items-center gap-1 group-hover:underline">
+              <div className="flex items-center justify-between pt-2.5 border-t border-white/[0.06] text-[10px] font-mono">
+                <span className="flex items-center gap-1 text-[#b9c7a5] group-hover:underline">
                   Inspect
                   <ChevronRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
                 </span>
-                <span className="text-[9px] text-[#626773] uppercase font-mono">
-                  {proj.status}
-                </span>
+                <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                  {proj.githubUrl && (
+                    <a
+                      href={proj.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-white transition-colors text-[9.5px]"
+                      title="GitHub Repository"
+                    >
+                      <GithubIcon className="w-3 h-3 text-[#b9c7a5]" />
+                      <span>Code</span>
+                    </a>
+                  )}
+                  <a
+                    href={proj.videoUrl || "#"}
+                    target={proj.videoUrl && proj.videoUrl !== "#" ? "_blank" : undefined}
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!proj.videoUrl || proj.videoUrl === "#") {
+                        e.preventDefault();
+                        alert("Video demo Drive link will open once you paste your Google Drive URL in data/projects.ts!");
+                      }
+                    }}
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-purple-500/15 hover:bg-purple-500/30 border border-purple-500/30 text-purple-300 transition-colors text-[9.5px]"
+                    title="Watch Video Demo on Google Drive"
+                  >
+                    <Video className="w-3 h-3 text-purple-400" />
+                    <span>Video Demo</span>
+                  </a>
+                </div>
               </div>
             </div>
           ))}

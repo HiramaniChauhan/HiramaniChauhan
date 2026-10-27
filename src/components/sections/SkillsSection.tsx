@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, Orbit, Rows3, Grid3X3 } from "lucide-react";
+import { Search, Orbit, Grid3X3 } from "lucide-react";
 import { SKILL_CATEGORIES, SKILLS_DATA, SkillItem } from "@/data/skills";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
@@ -18,9 +18,9 @@ const SkillsOrbitalRing = dynamic(
     ssr: false,
     loading: () => (
       <div
-        className="relative w-full h-[460px] sm:h-[600px] md:h-[720px] flex items-center justify-center select-none overflow-visible"
+        className="relative w-full h-[540px] sm:h-[620px] md:h-[660px] flex items-center justify-center select-none overflow-visible"
         style={{
-          perspective: "1200px",
+          perspective: "1300px",
           perspectiveOrigin: "50% 50%",
         }}
       >
@@ -28,12 +28,12 @@ const SkillsOrbitalRing = dynamic(
           className="relative w-0 h-0"
           style={{
             transformStyle: "preserve-3d",
-            transform: "rotateX(52deg) rotateZ(-22deg)",
+            transform: "rotateX(48deg) rotateZ(-16deg)",
           }}
         >
           <div
             className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.04] pointer-events-none"
-            style={{ width: "760px", height: "540px" }}
+            style={{ width: "1080px", height: "720px" }}
           />
         </div>
       </div>
@@ -49,7 +49,7 @@ export function SkillsSection() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
-  const [viewMode, setViewMode] = useState<"orbit" | "flow" | "grid">("orbit");
+  const [viewMode, setViewMode] = useState<"orbit" | "grid">("orbit");
   const { playClick, playHover } = useSoundEffects();
 
   const filteredSkills = SKILLS_DATA.filter((skill) => {
@@ -67,9 +67,6 @@ export function SkillsSection() {
       className="relative min-h-screen w-full py-16 sm:py-24 px-4 sm:px-8 lg:px-12 flex flex-col justify-center overflow-hidden border-t border-white/5 bg-[#0a0b0e]"
       aria-label="Skills Matrix"
     >
-      {/* Authentic Reference Dot-Matrix Background */}
-      <DotMatrixBackground text="AI SDE" />
-
       {/* MAIN CONTAINER */}
       <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 relative z-10 my-auto py-6">
         {/* Section Title & Subtitle */}
@@ -85,7 +82,7 @@ export function SkillsSection() {
             </div>
           </div>
 
-          {/* View Mode Switcher: Orbit 3D, Stream Flow, Grid Matrix */}
+          {/* View Mode Switcher: Orbit 3D, Grid Matrix */}
           <div className="flex items-center gap-1 p-1 rounded-xl bg-white/5 border border-white/10 self-start sm:self-auto">
             <button
               onClick={() => {
@@ -93,10 +90,11 @@ export function SkillsSection() {
                 setViewMode("orbit");
               }}
               onMouseEnter={playHover}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${viewMode === "orbit"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                viewMode === "orbit"
                   ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold shadow-sm"
                   : "text-[#828795] hover:text-white"
-                }`}
+              }`}
               title="3D Orbital Ring"
             >
               <Orbit className="w-3.5 h-3.5" />
@@ -105,28 +103,14 @@ export function SkillsSection() {
             <button
               onClick={() => {
                 playClick();
-                setViewMode("flow");
-              }}
-              onMouseEnter={playHover}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${viewMode === "flow"
-                  ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold shadow-sm"
-                  : "text-[#828795] hover:text-white"
-                }`}
-              title="Cascade Stream"
-            >
-              <Rows3 className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">FLOW</span>
-            </button>
-            <button
-              onClick={() => {
-                playClick();
                 setViewMode("grid");
               }}
               onMouseEnter={playHover}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${viewMode === "grid"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                viewMode === "grid"
                   ? "bg-[#b9c7a5] text-[#0c0d10] font-semibold shadow-sm"
                   : "text-[#828795] hover:text-white"
-                }`}
+              }`}
               title="Matrix Grid"
             >
               <Grid3X3 className="w-3.5 h-3.5" />
@@ -184,7 +168,9 @@ export function SkillsSection() {
         </div>
 
         {/* 3D ORBITAL RING OF SMALL SIZE BOXES */}
-        <div className="relative w-full flex items-center justify-center">
+        <div className="relative w-full flex items-center justify-center min-h-[540px] sm:min-h-[620px] md:min-h-[660px]">
+          {/* Centered AI+SDE Dot-Matrix Background directly in the middle of the orbit */}
+          <DotMatrixBackground text="AI+SDE" />
           <SkillsOrbitalRing
             skills={filteredSkills}
             onSelectSkill={(skill) => setSelectedSkill(skill)}

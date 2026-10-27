@@ -342,18 +342,27 @@ const DOT_PATTERNS: Record<string, string[]> = {
     ".....",
     ".....",
   ],
+  "+": [
+    ".....",
+    "..#..",
+    "..#..",
+    "#####",
+    "..#..",
+    "..#..",
+    ".....",
+  ],
 };
 
 export function DotMatrixBackground({
-  text = "AI SDE",
+  text = "AI+SDE",
   className = "",
 }: DotMatrixBackgroundProps) {
   const dots = useMemo(() => {
     const chars = text.toUpperCase().split("");
 
-    const dotSpacing = 38; // pixel spacing between dot centers
-    const charSpacing = 36; // spacing between letters within a word
-    const wordSpacing = 72; // spacing between words
+    const dotSpacing = 30; // balanced pixel spacing between dot centers
+    const charSpacing = 30; // spacing between letters within a word
+    const wordSpacing = 50; // spacing between words
 
     let currentX = 0;
     const charPositions: Array<{ char: string; startX: number }> = [];
@@ -404,8 +413,8 @@ export function DotMatrixBackground({
       aria-hidden="true"
     >
       <svg
-        className="w-full max-w-[1150px] h-auto opacity-[0.09] sm:opacity-[0.12] transition-opacity duration-700"
-        viewBox="-600 -180 1200 360"
+        className="w-full max-w-[840px] h-auto opacity-[0.09] sm:opacity-[0.13] transition-opacity duration-700"
+        viewBox="-480 -120 960 240"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -414,7 +423,7 @@ export function DotMatrixBackground({
             key={dot.key}
             cx={dot.x}
             cy={dot.y}
-            r="14"
+            r="10"
             className="fill-white transition-all duration-300"
           />
         ))}

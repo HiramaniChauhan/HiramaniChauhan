@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X, Award, ExternalLink, Calendar, CheckCircle, ShieldCheck } from "lucide-react";
+import { X, Award, ExternalLink, Calendar, CheckCircle, ShieldCheck, FileText } from "lucide-react";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
@@ -125,7 +125,7 @@ export function CertificateModal() {
         </div>
 
         {/* Verification Footer */}
-        <div className="flex items-center justify-between pt-4 border-t border-white/10 flex-wrap gap-2">
+        <div className="flex items-center justify-between pt-4 border-t border-white/10 flex-wrap gap-3">
           <span className="text-[11px] font-mono text-[#828795]">
             Verification status:{" "}
             <span className="text-[#dfcaa5]">
@@ -133,19 +133,37 @@ export function CertificateModal() {
             </span>
           </span>
 
-          {selectedCertificate.verificationUrl && (
-            <a
-              href={selectedCertificate.verificationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={playClick}
-              onMouseEnter={playHover}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-bold hover:bg-[#c8d6b4] transition-colors"
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Verify Credential
-            </a>
-          )}
+          <div className="flex items-center gap-2.5 flex-wrap">
+            {selectedCertificate.certificateUrl !== undefined && (
+              <a
+                href={selectedCertificate.certificateUrl || "#"}
+                target={selectedCertificate.certificateUrl ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-bold hover:bg-[#c8d6b4] transition-all shadow-md"
+                title="View original certificate on Google Drive"
+              >
+                <FileText className="w-3.5 h-3.5" />
+                <span>View Original Certificate</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
+
+            {selectedCertificate.verificationUrl && (
+              <a
+                href={selectedCertificate.verificationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={playClick}
+                onMouseEnter={playHover}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-[#edece8] hover:bg-white/10 hover:border-white/20 transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5 text-[#b9c7a5]" />
+                Verify Credential
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </div>

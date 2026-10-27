@@ -12,6 +12,7 @@ export interface SocialLinks {
   email: string;
   github: string;
   linkedin: string;
+  whatsapp?: string; // WhatsApp phone number (with country code) or wa.me username
   twitter?: string;
 }
 
@@ -42,6 +43,7 @@ export const PROFILE_DATA: ProfileData = {
     email: "hiramanichauhan2399@gmail.com",
     github: "https://github.com/HiramaniChauhan",
     linkedin: "https://www.linkedin.com/in/hiramanichauhan",
+    whatsapp: "@hiramanichauhan", // e.g. "91XXXXXXXXXX" or username
   },
   resumeUrl: "https://drive.google.com/drive/folders/1jmYiL78oZmQfJjXGmw12g2UGCyl-bA-T?usp=sharing",
   aboutStory: {

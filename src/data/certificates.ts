@@ -10,6 +10,7 @@ export interface Certificate {
   skillsCovered: string[];
   isVerifiedPlaceholder?: boolean;
   verificationUrl?: string;
+  certificateUrl?: string; // Google Drive link to view original certificate
 }
 
 export const CERTIFICATE_CATEGORIES = [
@@ -37,5 +38,6 @@ export const CERTIFICATES_DATA: Certificate[] = [
     ],
     isVerifiedPlaceholder: false,
     verificationUrl: "https://www.iapt.org.in/",
+    certificateUrl: "https://drive.google.com/file/d/1zxFrXO3wc3_7QSSwFknB3A1Ari6OseA8/view?usp=sharing", // Paste your Google Drive link here (e.g. https://drive.google.com/file/d/...)
   },
 ];

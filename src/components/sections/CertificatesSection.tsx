@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import { Award, Calendar, ShieldCheck, CheckCircle, ExternalLink, Sparkles } from "lucide-react";
+import { Award, Calendar, ShieldCheck, CheckCircle, ExternalLink, Sparkles, FileText } from "lucide-react";
 import { CERTIFICATES_DATA, Certificate } from "@/data/certificates";
 import { usePortfolioStore } from "@/store/usePortfolioStore";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 export function CertificatesSection() {
   const setSelectedCertificate = usePortfolioStore((state) => state.setSelectedCertificate);
-  const { playHover, playChime } = useSoundEffects();
+  const { playHover, playChime, playClick } = useSoundEffects();
 
   const handleOpenCert = (cert: Certificate) => {
     playChime(700, 0.3);
@@ -111,15 +111,49 @@ export function CertificatesSection() {
               </div>
 
               {/* Bottom Card Action Footer */}
-              <div className="flex items-center justify-between pt-6 border-t border-white/10 text-xs font-mono text-[#828795] flex-wrap gap-3">
+              <div className="flex items-center justify-between pt-6 border-t border-white/10 text-xs font-mono text-[#828795] flex-wrap gap-4">
                 <div className="flex items-center gap-2 text-[#b9c7a5] font-semibold group-hover:translate-x-1 transition-transform">
                   <ShieldCheck className="w-4 h-4" />
-                  <span>Click to view credential dossier</span>
+                  <span>Click card to view credential dossier</span>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-xs text-[#828795] hover:text-[#b9c7a5]">
-                  <span>IAPT Official Portal</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-3 flex-wrap">
+                  {cert.certificateUrl !== undefined && (
+                    <a
+                      href={cert.certificateUrl || "#"}
+                      target={cert.certificateUrl ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playClick();
+                      }}
+                      onMouseEnter={playHover}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#b9c7a5] text-[#0c0d10] text-xs font-mono font-bold hover:bg-[#c8d6b4] transition-all shadow-md hover:scale-[1.02]"
+                      title="View original certificate on Google Drive"
+                    >
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>View Original Certificate</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+
+                  {cert.verificationUrl && (
+                    <a
+                      href={cert.verificationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        playClick();
+                      }}
+                      onMouseEnter={playHover}
+                      className="flex items-center gap-1.5 text-xs text-[#828795] hover:text-[#b9c7a5] px-2 py-1 rounded-lg hover:bg-white/5 transition-colors"
+                      title="Official Issuing Portal"
+                    >
+                      <span>IAPT Portal</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

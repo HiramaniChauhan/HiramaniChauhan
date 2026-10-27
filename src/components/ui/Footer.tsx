@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ArrowUp, Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import { PROFILE_DATA } from "@/data/profile";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
@@ -76,6 +76,24 @@ export function Footer() {
               aria-label="LinkedIn"
             >
               <LinkedinIcon className="w-4 h-4" />
+            </a>
+            <a
+              href={
+                PROFILE_DATA.socials.whatsapp
+                  ? PROFILE_DATA.socials.whatsapp.startsWith("http")
+                    ? PROFILE_DATA.socials.whatsapp
+                    : `https://wa.me/${PROFILE_DATA.socials.whatsapp.replace(/[\s\-\+]/g, "")}`
+                  : "#"
+              }
+              target={PROFILE_DATA.socials.whatsapp ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#25D366]/50 hover:bg-[#25D366]/10 text-slate-300 hover:text-[#25D366] transition-all"
+              aria-label="WhatsApp"
+              title="Chat on WhatsApp"
+            >
+              <WhatsappIcon className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${PROFILE_DATA.socials.email}`}
